@@ -9,21 +9,22 @@ export default async function Home() {
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
         <Link
           className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
-          href="fan"
+          href="fans"
         >
-          <h3 className="text-2xl font-bold">Music fans →</h3>
+          <h3 className="text-2xl font-bold">Fans →</h3>
           <div className="text-lg">
-            Learn more about your favorite musicians. Discover which bands are
-            on the road.
+            Looking for a show of your favorite band? Discover who is on the
+            road.
           </div>
         </Link>
         <Link
           className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
-          href="pro"
+          href="bands"
         >
-          <h3 className="text-2xl font-bold">Music pros →</h3>
+          <h3 className="text-2xl font-bold">Bands →</h3>
           <div className="text-lg">
-            Add tour dates, manage your band&apos;s profile, and more.
+            Update your band&apos;s tour dates and let your fans know where you
+            are.
           </div>
         </Link>
       </div>
