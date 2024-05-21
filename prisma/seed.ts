@@ -11,6 +11,8 @@ async function main() {
         name: b.name,
         bio: b.bio,
         genre: b.genre,
+        foundedYear: b.foundedYear,
+        country: b.country,
       },
     });
   }

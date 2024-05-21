@@ -4,15 +4,21 @@ import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
 export const bandRouter = createTRPCRouter({
   create: publicProcedure
-    .input(z.object({ name: z.string().min(1), bio: z.string().min(1) }))
+    .input(
+      z.object({
+        name: z.string().min(1),
+        bio: z.string().min(1),
+        foundedYear: z.number(),
+        country: z.string(),
+      }),
+    )
     .mutation(async ({ ctx, input }) => {
-      // simulate a slow db call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
       return ctx.db.band.create({
         data: {
           name: input.name,
           bio: input.bio,
+          foundedYear: input.foundedYear,
+          country: input.country,
         },
       });
     }),

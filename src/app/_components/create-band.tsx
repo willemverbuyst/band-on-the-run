@@ -9,12 +9,16 @@ export function CreateBand() {
   const router = useRouter();
   const [name, setName] = useState("");
   const [bio, setBio] = useState("");
+  const [foundedYear, setFoundedYear] = useState("");
+  const [country, setCountry] = useState("");
 
   const createBand = api.band.create.useMutation({
     onSuccess: () => {
       router.refresh();
       setName("");
       setBio("");
+      setFoundedYear("");
+      setCountry("");
     },
   });
 
@@ -22,7 +26,12 @@ export function CreateBand() {
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        createBand.mutate({ name, bio });
+        createBand.mutate({
+          name,
+          bio,
+          foundedYear: Number(foundedYear),
+          country,
+        });
       }}
       className="flex flex-col gap-2"
     >
@@ -31,6 +40,20 @@ export function CreateBand() {
         placeholder="Name of the band"
         value={name}
         onChange={(e) => setName(e.target.value)}
+        className="w-full rounded-full px-4 py-2 text-black"
+      />
+      <input
+        type="text"
+        placeholder="Year the band was founded"
+        value={foundedYear}
+        onChange={(e) => setFoundedYear(e.target.value)}
+        className="w-full rounded-full px-4 py-2 text-black"
+      />
+      <input
+        type="text"
+        placeholder="Country where the band is from"
+        value={country}
+        onChange={(e) => setCountry(e.target.value)}
         className="w-full rounded-full px-4 py-2 text-black"
       />
       <textarea
