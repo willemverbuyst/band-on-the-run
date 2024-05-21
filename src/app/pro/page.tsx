@@ -1,3 +1,10 @@
+import { CreateBand } from "../_components/create-band";
+
 export default function Page() {
-  return <div>Pro page</div>;
+  return (
+    <div>
+      <h1>Pro Page</h1>
+      <CreateBand />
+    </div>
+  );
 }
