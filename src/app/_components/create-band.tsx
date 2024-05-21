@@ -5,11 +5,11 @@ import { useState } from "react";
 
 import { api } from "~/trpc/react";
 
-export function CreatePost() {
+export function CreateBand() {
   const router = useRouter();
   const [name, setName] = useState("");
 
-  const createPost = api.post.create.useMutation({
+  const createBand = api.band.create.useMutation({
     onSuccess: () => {
       router.refresh();
       setName("");
@@ -20,7 +20,7 @@ export function CreatePost() {
     <form
       onSubmit={(e) => {
         e.preventDefault();
-        createPost.mutate({ name });
+        createBand.mutate({ name });
       }}
       className="flex flex-col gap-2"
     >
@@ -34,9 +34,9 @@ export function CreatePost() {
       <button
         type="submit"
         className="rounded-full bg-white/10 px-10 py-3 font-semibold transition hover:bg-white/20"
-        disabled={createPost.isPending}
+        disabled={createBand.isPending}
       >
-        {createPost.isPending ? "Submitting..." : "Submit"}
+        {createBand.isPending ? "Submitting..." : "Submit"}
       </button>
     </form>
   );
