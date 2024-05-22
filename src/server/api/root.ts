@@ -1,5 +1,6 @@
 import { bandRouter } from "~/server/api/routers/band";
 import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
+import { showRouter } from "./routers/show";
 
 /**
  * This is the primary router for your server.
@@ -8,6 +9,7 @@ import { createCallerFactory, createTRPCRouter } from "~/server/api/trpc";
  */
 export const appRouter = createTRPCRouter({
   band: bandRouter,
+  show: showRouter,
 });
 
 // export type definition of API

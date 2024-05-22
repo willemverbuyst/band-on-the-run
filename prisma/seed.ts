@@ -5,6 +5,7 @@ import { shows } from "./development/shows";
 const prisma = new PrismaClient();
 
 async function main() {
+  await prisma.bandShow.deleteMany();
   await prisma.show.deleteMany();
   await prisma.band.deleteMany();
 
@@ -23,40 +24,31 @@ async function main() {
     bandIds.push(band.id);
   }
 
-  for (const s of shows.slice(0, 20)) {
-    const bandId = bandIds[0];
-
-    if (!s || !bandId) {
-      return;
-    }
-    await prisma.show.create({
+  const showIds: string[] = [];
+  for (const s of shows) {
+    const show = await prisma.show.create({
       data: {
         name: s.name,
         date: new Date(s.date),
         isFestival: s.isFestival,
         location: s.location,
-        bandId,
       },
     });
+    showIds.push(show.id);
   }
 
-  for (const s of shows.slice(20)) {
-    const bandId = bandIds[1];
-
-    if (!s || !bandId) {
-      return;
-    }
-    await prisma.show.create({
+  for (let i = 0; i < 50; i++) {
+    const randomBandId = bandIds.sort(() => Math.random() - 0.5)[0] ?? "";
+    const randomShowId = showIds.sort(() => Math.random() - 0.5)[0] ?? "";
+    await prisma.bandShow.create({
       data: {
-        name: s.name,
-        date: new Date(s.date),
-        isFestival: s.isFestival,
-        location: s.location,
-        bandId,
+        bandId: randomBandId,
+        showId: randomShowId,
       },
     });
   }
 }
+
 main()
   .then(async () => {
     await prisma.$disconnect();
