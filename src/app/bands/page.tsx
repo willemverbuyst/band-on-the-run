@@ -1,10 +1,18 @@
-import { CreateBand } from "../_components/CreateBand";
+import Link from "next/link";
+import { api } from "~/trpc/server";
 
-export default function Page() {
+export default async function Page() {
+  const bands = await api.band.getAll();
+
   return (
     <div>
-      <h1>Pro Page</h1>
-      <CreateBand />
+      <ul>
+        {bands.map((b) => (
+          <li key={b.id}>
+            <Link href={`/bands/${b.id}`}>{b.name}</Link>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }

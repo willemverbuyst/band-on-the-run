@@ -3,6 +3,7 @@ import "~/styles/globals.css";
 import { GeistSans } from "geist/font/sans";
 
 import { TRPCReactProvider } from "~/trpc/react";
+import NavBar from "./_components/NavBar";
 
 export const metadata = {
   title: "Band on the Run",
@@ -19,8 +20,10 @@ export default function RootLayout({
     <html lang="en" className={`${GeistSans.variable}`}>
       <body>
         <TRPCReactProvider>
-          <main className="flex min-h-screen flex-col items-center bg-black p-10 text-white">
-            {children}
+          <main className="flex min-h-screen w-full flex-col bg-black text-white">
+            <NavBar />
+
+            <div className="overflow-auto p-10">{children}</div>
           </main>
         </TRPCReactProvider>
       </body>
