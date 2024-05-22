@@ -29,6 +29,37 @@ export default async function Home() {
             </div>
           </Link>
         </div>
+        <div className="flex max-w-prose flex-col gap-2">
+          <h2 className="text-center text-3xl">Welcome to Band on the Run</h2>
+          <h3 className="text-center text-gray-500">
+            the ultimate destination for connecting bands with their fans!
+          </h3>
+
+          <section className="flex flex-col gap-5 text-justify">
+            <p>
+              <b>For Fans:</b> Are you a music lover eager to catch your
+              favorite band live in concert? Our &quot;Fans&quot; section is
+              just for you. Here, you can discover which bands are currently on
+              tour and find shows near you. Stay up-to-date with the latest tour
+              dates and never miss a chance to see your favorite artists perform
+              live.
+            </p>
+            <p>
+              <b>For Bands:</b> Are you a band looking to keep your fans
+              informed about your latest tour dates? The &quot;Bands&quot;
+              section allows you to easily update your tour schedule. Make sure
+              your fans know exactly where and when you&apos;ll be performing
+              next. Keep the excitement alive and ensure a great turnout at
+              every show by keeping your tour information current.
+            </p>
+            <p>
+              Explore the sections by clicking on the links and start your
+              journey with &quot;Band on the Run&quot; today! Whether
+              you&apos;re a fan looking for a show or a band updating your tour
+              dates, we&apos;ve got you covered.
+            </p>
+          </section>
+        </div>
       </div>
     </div>
   );
