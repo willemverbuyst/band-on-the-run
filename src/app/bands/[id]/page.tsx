@@ -28,8 +28,16 @@ export default async function Page({ params }: { params: { id: string } }) {
       </div>
       {sortedShows.length > 0 ? (
         <section className="rounded bg-white/10 py-2">
-          <h3 className="text-center text-2xl font-bold">Tour Dates</h3>
           <table className="table-auto">
+            <thead>
+              <tr>
+                <th className="px-4 py-2">Date</th>
+                <th className="px-4 py-2">Name</th>
+                <th className="px-4 py-2">City</th>
+                <th className="px-4 py-2">Country</th>
+                <th className="px-4 py-2">Type</th>
+              </tr>
+            </thead>
             <tbody>
               {sortedShows.map(({ show }) => (
                 <tr key={show.id} className="cursor-pointer">

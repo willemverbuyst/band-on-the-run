@@ -6,7 +6,9 @@ export const showRouter = createTRPCRouter({
   getAll: publicProcedure.query(({ ctx }) => {
     return ctx.db.show.findMany({
       orderBy: { date: "asc" },
-      include: { bandShows: { include: { band: { select: { name: true } } } } },
+      include: {
+        bandShows: { include: { band: { select: { name: true, id: true } } } },
+      },
     });
   }),
 
