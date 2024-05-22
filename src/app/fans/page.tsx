@@ -10,7 +10,7 @@ export default async function Page() {
       <ul>
         {bands.map((b) => (
           <li key={b.id}>
-            <Link href={`/fan/bands/${b.id}`}>{b.name}</Link>
+            <Link href={`/fans/bands/${b.id}`}>{b.name}</Link>
           </li>
         ))}
       </ul>

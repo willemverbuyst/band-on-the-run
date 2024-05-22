@@ -27,6 +27,10 @@ export const bandRouter = createTRPCRouter({
     return ctx.db.band.findMany();
   }),
 
+  getOne: publicProcedure.input(z.string()).query(({ ctx, input }) => {
+    return ctx.db.band.findUnique({ where: { id: input } });
+  }),
+
   getLatest: publicProcedure.query(({ ctx }) => {
     return ctx.db.band.findFirst({
       orderBy: { createdAt: "desc" },

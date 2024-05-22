@@ -1,4 +1,4 @@
-import { CreateBand } from "../_components/create-band";
+import { CreateBand } from "../_components/CreateBand";
 
 export default function Page() {
   return (
