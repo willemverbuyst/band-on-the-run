@@ -5,8 +5,8 @@ import { shows } from "./development/shows";
 const prisma = new PrismaClient();
 
 async function main() {
-  await prisma.band.deleteMany();
   await prisma.show.deleteMany();
+  await prisma.band.deleteMany();
 
   const bandIds: string[] = [];
 

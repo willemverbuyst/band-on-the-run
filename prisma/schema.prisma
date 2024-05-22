@@ -23,6 +23,7 @@ model Band {
     country     String
     createdAt   DateTime @default(now())
     updatedAt   DateTime @updatedAt
+    shows       Show[]   @relation("BandShows")
 }
 
 type Location {
@@ -37,6 +38,7 @@ model Show {
     isFestival Boolean
     location   Location
     bandId     String   @db.ObjectId
+    band       Band     @relation(fields: [bandId], references: [id], name: "BandShows")
     createdAt  DateTime @default(now())
     updatedAt  DateTime @updatedAt
 }
