@@ -20,7 +20,7 @@ export default function RootLayout({
     <html lang="en" className={`${GeistSans.variable}`}>
       <body>
         <TRPCReactProvider>
-          <main className="flex min-h-screen w-full flex-col bg-black text-white">
+          <main className="flex min-h-screen w-full flex-col bg-zinc-950 text-white">
             <NavBar />
 
             <div className="overflow-auto p-10">{children}</div>
