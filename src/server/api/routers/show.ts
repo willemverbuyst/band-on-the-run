@@ -7,7 +7,9 @@ export const showRouter = createTRPCRouter({
     return ctx.db.show.findMany({
       orderBy: { date: "asc" },
       include: {
-        bandShows: { include: { band: { select: { name: true, id: true } } } },
+        bandShows: {
+          include: { band: { select: { name: true, id: true, genre: true } } },
+        },
       },
     });
   }),

@@ -10,8 +10,8 @@ export default async function Page({
   searchParams: { genre?: string };
 }) {
   const genreSearchParam = searchParams?.genre;
-  const bands = await api.band.getAll();
   const genres = genreSearchParam?.split(",") ?? [];
+  const bands = await api.band.getAll();
 
   const bandsFilteredByGenre = bands.filter((band) => {
     if (!genres.length) return true;

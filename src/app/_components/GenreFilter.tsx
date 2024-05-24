@@ -16,24 +16,26 @@ export default function GenreFilter() {
 
   function handleClick(genre: string) {
     const params = new URLSearchParams(searchParams);
-    if (!params.get("genre")?.toString()) {
-      params.set("genre", genre);
-    } else if (!params.get("genre")?.toString().includes(genre)) {
-      const genres = params.get("genre")?.toString().split(",") ?? [];
-      params.set("genre", `${[...genres, genre].join(",")}`);
-    } else if (params.get("genre")?.toString().includes(genre)) {
-      const genres = params.get("genre")?.toString().split(",") ?? [];
-      const index = genres.indexOf(genre);
-      const updatedGenres = genres.filter((_, i) => i !== index);
-      updatedGenres.length
-        ? params.set("genre", `${updatedGenres.join(",")}`)
-        : params.delete("genre");
+    const currentGenres = params.get("genre")?.toString().split(",") ?? [];
+
+    if (!currentGenres.includes(genre)) {
+      currentGenres.push(genre);
+    } else {
+      const index = currentGenres.indexOf(genre);
+      currentGenres.splice(index, 1);
     }
+
+    if (currentGenres.length) {
+      params.set("genre", currentGenres.join(","));
+    } else {
+      params.delete("genre");
+    }
+
     router.replace(`${pathname}?${params.toString()}`);
   }
 
   return (
-    <section className="flex max-w-96 flex-wrap justify-center gap-2">
+    <section className="flex flex-wrap justify-center gap-2 md:w-4/12 ">
       {uniqueGenres.map((genre) => (
         <button key={genre} onClick={() => handleClick(genre)}>
           <GenreBadge
