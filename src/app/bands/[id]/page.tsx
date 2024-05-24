@@ -1,3 +1,5 @@
+import Link from "next/link";
+import GenreBadge from "~/app/_components/GenreBadge";
 import PageTitle from "~/app/_components/PageTitle";
 import { api } from "~/trpc/server";
 
@@ -21,9 +23,9 @@ export default async function Page({ params }: { params: { id: string } }) {
       <p className="flex max-w-[400px] text-justify">{band.bio}</p>
       <div className="flex justify-around gap-2">
         {band.genre.map((g) => (
-          <span className="rounded-xl bg-sky-500 px-3 py-1" key={g}>
-            {g}
-          </span>
+          <Link key={g} href={`/bands?genre=${g}`}>
+            <GenreBadge genre={g} customStyle="bg-cyan-500" />
+          </Link>
         ))}
       </div>
       {sortedShows.length > 0 ? (
