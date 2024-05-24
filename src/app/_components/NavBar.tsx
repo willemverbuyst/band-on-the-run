@@ -14,9 +14,6 @@ export default function NavBar() {
         <Link href="/bands" className="px-5">
           Bands
         </Link>
-        <Link href="/musicians" className="px-5">
-          Musicians
-        </Link>
       </nav>
       <button>Log In</button>
     </div>
