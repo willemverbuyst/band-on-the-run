@@ -4,9 +4,9 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import React from "react";
 import { type api } from "~/trpc/server";
-import GenreBadge from "./GenreBadge";
+import GenreBadge from "../GenreBadge";
 
-export default function ShowsOverview({
+export default function Overview({
   shows,
 }: {
   shows: Awaited<ReturnType<typeof api.show.getAll>>;
