@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import React from "react";
 import { type api } from "~/trpc/server";
+import { formatDate } from "~/utils/date";
 import GenreBadge from "../GenreBadge";
 
 export default function Overview({
@@ -43,7 +44,7 @@ export default function Overview({
       <tbody>
         {showsFilteredByGenre.map((show) => (
           <tr key={show.id}>
-            <td className="px-4 py-2">{show.date.toLocaleDateString()}</td>
+            <td className="px-4 py-2">{formatDate(show.date)}</td>
             <td className="px-4 py-2">
               <Link
                 className="cursor-pointer hover:underline"
