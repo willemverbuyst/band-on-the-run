@@ -32,34 +32,37 @@ export default function Details({
         ))}
       </div>
       {sortedShows.length > 0 ? (
-        <section className="rounded bg-white/10 py-2">
-          <table className="table-auto">
-            <thead>
-              <tr>
-                <th className="px-4 py-2">Date</th>
-                <th className="px-4 py-2">Name</th>
-                <th className="px-4 py-2">City</th>
-                <th className="px-4 py-2">Country</th>
-                <th className="px-4 py-2">Type</th>
+        <table className="table-auto bg-white/10 text-left text-xs text-white ">
+          <thead className="uppercase">
+            <tr>
+              <th className="px-4 py-2">Date</th>
+              <th className="px-4 py-2">Name</th>
+              <th className="px-4 py-2">City</th>
+              <th className="px-4 py-2">Country</th>
+              <th className="px-4 py-2">Type</th>
+            </tr>
+          </thead>
+          <tbody>
+            {sortedShows.map(({ show }) => (
+              <tr key={show.id}>
+                <td className="px-4 py-2">{show.date.toLocaleDateString()}</td>
+                <td className="px-4 py-2">
+                  <Link
+                    className="cursor-pointer hover:underline"
+                    href={`/shows/${show.id}`}
+                  >
+                    {show.name}
+                  </Link>
+                </td>
+                <td className="px-4 py-2">{show.location.city}</td>
+                <td className="px-4 py-2">{show.location.country}</td>
+                <td className="px-4 py-2 text-xs text-gray-500">
+                  {show.isFestival ? "festival" : "regular show"}
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {sortedShows.map(({ show }) => (
-                <tr key={show.id} className="cursor-pointer">
-                  <td className="px-4 py-2">
-                    {show.date.toLocaleDateString()}
-                  </td>
-                  <td className="px-4 py-2">{show.name}</td>
-                  <td className="px-4 py-2">{show.location.city}</td>
-                  <td className="px-4 py-2">{show.location.country}</td>
-                  <td className="px-4 py-2 text-xs text-gray-500">
-                    {show.isFestival ? "festival" : "regular show"}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </section>
+            ))}
+          </tbody>
+        </table>
       ) : (
         <div className="text-center">No shows scheduled</div>
       )}

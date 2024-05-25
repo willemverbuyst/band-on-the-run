@@ -29,7 +29,7 @@ export default function Overview({
 
   return shows.length > 0 ? (
     <table className="table-auto bg-white/10 text-left text-xs text-white ">
-      <thead className=" uppercase">
+      <thead className="uppercase">
         <tr>
           <th className="border-b-2 border-gray-500 px-4 py-2">Date</th>
           <th className="border-b-2 border-gray-500 px-4 py-2">Name</th>
@@ -44,7 +44,14 @@ export default function Overview({
         {showsFilteredByGenre.map((show) => (
           <tr key={show.id}>
             <td className="px-4 py-2">{show.date.toLocaleDateString()}</td>
-            <td className="px-4 py-2">{show.name}</td>
+            <td className="px-4 py-2">
+              <Link
+                className="cursor-pointer hover:underline"
+                href={`/shows/${show.id}`}
+              >
+                {show.name}
+              </Link>
+            </td>
             <td className="px-4 py-2">
               {show.bandShows.map((bs, i) => (
                 <React.Fragment key={i}>
