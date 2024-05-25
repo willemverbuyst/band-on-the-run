@@ -17,6 +17,7 @@ export const showRouter = createTRPCRouter({
   getOne: publicProcedure.input(z.string()).query(({ ctx, input }) => {
     return ctx.db.show.findUnique({
       where: { id: input },
+      include: { bandShows: { include: { band: true } } },
     });
   }),
 });
