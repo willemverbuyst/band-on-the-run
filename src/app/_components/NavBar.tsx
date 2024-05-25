@@ -2,9 +2,15 @@ import Link from "next/link";
 
 export default function NavBar() {
   return (
-    <div className="flex items-center justify-between bg-gray-200 p-2 dark:bg-gray-800">
-      <h1 className="text-xl">band on the run</h1>
-      <nav>
+    <div className="grid grid-cols-3 bg-gray-200 p-2 dark:bg-gray-800">
+      <section className="mr-auto px-3">
+        <h1 className="text-xl text-cyan-500">
+          <Link href="/" className="px-5">
+            bandOnTheRun
+          </Link>
+        </h1>
+      </section>
+      <nav className="flex justify-center">
         <Link href="/" className="px-5">
           Home
         </Link>
@@ -15,7 +21,9 @@ export default function NavBar() {
           Bands
         </Link>
       </nav>
-      <button>Log In</button>
+      <section className="ml-auto px-3">
+        <button>Log In</button>
+      </section>
     </div>
   );
 }

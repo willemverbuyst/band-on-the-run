@@ -6,7 +6,7 @@ import { TRPCReactProvider } from "~/trpc/react";
 import NavBar from "./_components/NavBar";
 
 export const metadata = {
-  title: "Band on the Run",
+  title: "bandOnTheRun",
   description: "Discover which bands are on the road.",
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
