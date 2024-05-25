@@ -23,7 +23,7 @@ export default async function Page({ params }: { params: { id: string } }) {
       <p className="flex max-w-[400px] text-justify">{band.bio}</p>
       <div className="flex justify-around gap-2">
         {band.genre.map((g) => (
-          <Link key={g} href={`/bands?genre=${g}`}>
+          <Link key={g} href={`/bands?genre=${g.replaceAll(" ", "+")}`}>
             <GenreBadge genre={g} customStyle="bg-cyan-500" />
           </Link>
         ))}
