@@ -13,8 +13,9 @@ export default function Overview({
   shows: Awaited<ReturnType<typeof api.show.getAll>>;
 }) {
   const searchParams = useSearchParams();
-  const genreSearchParam = searchParams.get("genre");
-  const genres = genreSearchParam?.split(",") ?? [];
+  const genreParam = searchParams.get("genre");
+  const searchParam = searchParams.get("search");
+  const genres = genreParam?.split(",") ?? [];
 
   function getGenres(
     show: Awaited<ReturnType<typeof api.show.getAll>>[number],
@@ -23,9 +24,22 @@ export default function Overview({
     return Array.from(new Set(genres)).sort((a, b) => a.localeCompare(b));
   }
 
-  const showsFilteredByGenre = [...shows].filter((show) => {
-    if (!genres.length) return true;
-    return getGenres(show).some((g) => genres.includes(g));
+  const filteredShows = [...shows].filter((show) => {
+    if (!genres.length && !searchParam) {
+      return true;
+    }
+
+    const searchString = searchParam?.toLowerCase() ?? "";
+    const showName = show.name.toLowerCase();
+
+    if (!genres.length) {
+      return showName.includes(searchString);
+    }
+
+    return (
+      getGenres(show).some((g) => genres.includes(g)) &&
+      showName.includes(searchString)
+    );
   });
 
   return shows.length > 0 ? (
@@ -42,7 +56,7 @@ export default function Overview({
         </tr>
       </thead>
       <tbody>
-        {showsFilteredByGenre.map((show) => (
+        {filteredShows.map((show) => (
           <tr key={show.id}>
             <td className="px-4 py-2">{formatDate(show.date)}</td>
             <td className="px-4 py-2">

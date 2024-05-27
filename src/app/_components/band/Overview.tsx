@@ -14,7 +14,7 @@ export default function Overview({
   const searchParam = searchParams.get("search");
   const genres = genreParam?.split(",") ?? [];
 
-  const bandsFilteredByGenre = bands.filter((band) => {
+  const filteredBands = bands.filter((band) => {
     if (!genres.length && !searchParam) {
       return true;
     }
@@ -41,7 +41,7 @@ export default function Overview({
 
   return (
     <div className="flex flex-wrap justify-center gap-6">
-      {bandsFilteredByGenre.map((band) => (
+      {filteredBands.map((band) => (
         <Card key={band.id} band={band} />
       ))}
     </div>
