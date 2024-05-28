@@ -1,6 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
+
 import { type api } from "~/trpc/server";
 import Card from "./Card";
 
