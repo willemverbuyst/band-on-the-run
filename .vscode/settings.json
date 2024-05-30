@@ -1,5 +1,14 @@
 {
-  "cSpell.words": ["nextjs", "superjson", "tailwindcss", "tanstack", "trpc"],
+  "cSpell.words": [
+    "nextauth",
+    "nextjs",
+    "signin",
+    "signout",
+    "superjson",
+    "tailwindcss",
+    "tanstack",
+    "trpc"
+  ],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "typescript.tsdk": "node_modules/typescript/lib"
