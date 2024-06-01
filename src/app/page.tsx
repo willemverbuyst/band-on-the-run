@@ -1,12 +1,11 @@
 import Link from "next/link";
+import PageTitle from "./_components/PageTitle";
 
 export default async function Home() {
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center">
-      <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16 ">
-        <h1 className="text-5xl font-extrabold tracking-tight text-yellow-500 sm:text-[5rem]">
-          Band on the Run
-        </h1>
+    <div className="flex min-h-screen flex-col items-center gap-8">
+      <PageTitle title="Band on the Run" />
+      <div className="container flex flex-col items-center justify-center gap-12 px-4 ">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
           <Link
             className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
@@ -30,7 +29,9 @@ export default async function Home() {
           </Link>
         </div>
         <div className="flex max-w-prose flex-col gap-2">
-          <h2 className="text-center text-3xl">Welcome to Band on the Run</h2>
+          <h2 className="text-center text-3xl">
+            Welcome to <span className="text-cyan-500">bandOnTheRun</span>
+          </h2>
           <h3 className="text-center text-gray-500">
             the ultimate destination for connecting bands with their fans!
           </h3>

@@ -38,14 +38,22 @@ async function main() {
   }
 
   for (let i = 0; i < 50; i++) {
+    const bandShow = new Set();
     const randomBandId = bandIds.sort(() => Math.random() - 0.5)[0] ?? "";
     const randomShowId = showIds.sort(() => Math.random() - 0.5)[0] ?? "";
-    await prisma.bandShow.create({
-      data: {
-        bandId: randomBandId,
-        showId: randomShowId,
-      },
-    });
+
+    // to prevent duplicate shows for a band
+    if (bandShow.has(`${randomBandId}-${randomShowId}`)) {
+      return;
+    } else {
+      bandShow.add(`${randomBandId}-${randomShowId}`);
+      await prisma.bandShow.create({
+        data: {
+          bandId: randomBandId,
+          showId: randomShowId,
+        },
+      });
+    }
   }
 }
 

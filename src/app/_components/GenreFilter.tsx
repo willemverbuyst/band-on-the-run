@@ -41,7 +41,7 @@ export default function GenreFilter() {
           <GenreBadge
             genre={genre}
             customStyle={
-              searchParams.get("genre")?.toString().includes(genre)
+              searchParams.get("genre")?.toString().split(",").includes(genre)
                 ? "bg-pink-500"
                 : "bg-cyan-500"
             }
