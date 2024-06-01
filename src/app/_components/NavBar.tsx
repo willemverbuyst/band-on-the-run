@@ -23,6 +23,11 @@ export default async function NavBar() {
         <Link href="/bands" className="px-5">
           Bands
         </Link>
+        {session && (
+          <Link href="/admin" className="px-5">
+            Admin
+          </Link>
+        )}
       </nav>
       <section className="ml-auto flex px-3 ">
         <Link
