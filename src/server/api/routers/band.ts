@@ -7,7 +7,7 @@ export const bandRouter = createTRPCRouter({
     .input(
       z.object({
         name: z.string().min(1),
-        bio: z.string().min(1),
+        bio: z.string().optional(),
         foundedYear: z.number(),
         country: z.string(),
         genre: z.array(z.string()),
