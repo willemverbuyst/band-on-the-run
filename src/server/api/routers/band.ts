@@ -10,6 +10,7 @@ export const bandRouter = createTRPCRouter({
         bio: z.string().min(1),
         foundedYear: z.number(),
         country: z.string(),
+        genre: z.array(z.string()),
       }),
     )
     .mutation(async ({ ctx, input }) => {
@@ -19,6 +20,7 @@ export const bandRouter = createTRPCRouter({
           bio: input.bio,
           foundedYear: input.foundedYear,
           country: input.country,
+          genre: input.genre,
         },
       });
     }),
