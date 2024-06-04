@@ -3,11 +3,13 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useMemo } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import type { SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { api } from "~/trpc/react";
 import { getYearsForSelect } from "~/utils/date";
 import { getUniqueGenres } from "~/utils/genre";
-import { BandSchema, bandSchema } from "~/validationSchema/band";
+import type { BandSchema } from "~/validationSchema/band";
+import { bandSchema } from "~/validationSchema/band";
 
 export function CreateBand() {
   const router = useRouter();

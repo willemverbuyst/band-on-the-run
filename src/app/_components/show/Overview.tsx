@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import React from "react";
-import { type api } from "~/trpc/server";
+import type { api } from "~/trpc/server";
 import { formatDate } from "~/utils/date";
 import { showTypes } from "~/utils/showType";
 import GenreBadge from "../GenreBadge";

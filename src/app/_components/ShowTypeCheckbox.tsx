@@ -1,6 +1,6 @@
 "use client";
 
-import { type ShowType } from "@prisma/client";
+import type { ShowType } from "@prisma/client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 import { showTypes } from "~/utils/showType";

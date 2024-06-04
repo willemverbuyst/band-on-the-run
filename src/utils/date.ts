@@ -7,7 +7,7 @@ export function formatDate(date: Date) {
 }
 
 export function getYearsForSelect() {
-  let years = [];
+  const years = [];
   const currentYear = new Date().getFullYear();
 
   for (let i = 1950; i <= currentYear; i++) {

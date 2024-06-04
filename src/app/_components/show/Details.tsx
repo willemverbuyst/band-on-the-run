@@ -1,4 +1,4 @@
-import { type api } from "~/trpc/server";
+import type { api } from "~/trpc/server";
 import PageTitle from "../PageTitle";
 import Card from "../band/Card";
 

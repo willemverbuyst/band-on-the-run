@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { type api } from "~/trpc/server";
+import type { api } from "~/trpc/server";
 import GenreBadge from "../GenreBadge";
 
 export default function Card({
