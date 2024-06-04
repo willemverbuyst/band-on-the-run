@@ -1,4 +1,5 @@
 import type { api } from "~/trpc/server";
+import { formatDate } from "~/utils/date";
 import PageTitle from "../PageTitle";
 import Card from "../band/Card";
 
@@ -14,6 +15,10 @@ export default function Details({
   return (
     <div className="flex flex-col items-center justify-center gap-4">
       <PageTitle title={show.name} />
+      <h3 className="text-center text-2xl">{formatDate(show.date)}</h3>
+      <h3 className="text-center text-2xl">
+        {show.location.city} - {show.location.country}
+      </h3>
       <div className="flex flex-wrap justify-center gap-6">
         {show.bandShows.map(({ band }) => (
           <Card key={band.id} band={band} />
