@@ -1,7 +1,8 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { bands } from "../../../prisma/development/bands";
+import { useMemo } from "react";
+import { getUniqueGenres } from "~/utils/genre";
 import GenreBadge from "./GenreBadge";
 
 export default function GenreFilter() {
@@ -9,10 +10,7 @@ export default function GenreFilter() {
   const pathname = usePathname();
   const router = useRouter();
 
-  const genres = bands.reduce((acc, band) => {
-    return [...acc, ...band.genre];
-  }, [] as string[]);
-  const uniqueGenres = Array.from(new Set(genres));
+  const genres = useMemo(() => getUniqueGenres(), []);
 
   function handleClick(genre: string) {
     const params = new URLSearchParams(searchParams);
@@ -36,7 +34,7 @@ export default function GenreFilter() {
 
   return (
     <section className="flex flex-wrap justify-center gap-2 md:w-4/12 ">
-      {uniqueGenres.map((genre) => (
+      {genres.map((genre) => (
         <button key={genre} onClick={() => handleClick(genre)}>
           <GenreBadge
             genre={genre}

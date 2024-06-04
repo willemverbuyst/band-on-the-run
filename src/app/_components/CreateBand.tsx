@@ -6,15 +6,12 @@ import { useMemo } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { api } from "~/trpc/react";
 import { getYearsForSelect } from "~/utils/date";
+import { getUniqueGenres } from "~/utils/genre";
 import { BandSchema, bandSchema } from "~/validationSchema/band";
-import { bands } from "../../../prisma/development/bands";
 
 export function CreateBand() {
   const router = useRouter();
-  const genresFromData = bands.reduce((acc, band) => {
-    return [...acc, ...band.genre];
-  }, [] as string[]);
-  const uniqueGenres = Array.from(new Set(genresFromData));
+  const genres = useMemo(() => getUniqueGenres(), []);
   const years = useMemo(() => getYearsForSelect(), []);
 
   const {
@@ -93,9 +90,9 @@ export function CreateBand() {
           className="w-full rounded px-4 py-2 text-black"
           multiple
         >
-          {uniqueGenres.map((ug) => (
-            <option key={ug} value={ug}>
-              {ug}
+          {genres.map((g) => (
+            <option key={g} value={g}>
+              {g}
             </option>
           ))}
         </select>
