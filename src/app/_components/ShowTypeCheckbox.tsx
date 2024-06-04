@@ -42,9 +42,9 @@ export default function ShowTypeCheckbox() {
   }
 
   return (
-    <section>
+    <section className="flex gap-4">
       {showTypes.map((st) => (
-        <section className="flex gap-2">
+        <section key={st} className="flex gap-1">
           <input
             id={st}
             type="checkbox"
