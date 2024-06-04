@@ -15,34 +15,64 @@ export default function Overview({
   const searchParams = useSearchParams();
   const genreParam = searchParams.get("genre");
   const searchParam = searchParams.get("search");
+  const showTypeParam = searchParams.get("type");
   const genres = genreParam?.split(",") ?? [];
+  const showTypes = showTypeParam?.split(",") ?? [];
 
-  function getGenres(
+  function getGenresOfShow(
     show: Awaited<ReturnType<typeof api.show.getAll>>[number],
   ): string[] {
     const genres = show.bandShows.flatMap((bs) => bs.band.genre);
     return Array.from(new Set(genres)).sort((a, b) => a.localeCompare(b));
   }
 
-  const filteredShows = [...shows].filter((show) => {
-    if (!genres.length && !searchParam) {
+  function filterOnType(
+    show: Awaited<ReturnType<typeof api.show.getAll>>[number],
+  ) {
+    if (showTypes.length === 0) {
+      return false;
+    }
+
+    if (showTypes.length === 2) {
       return true;
     }
 
+    if (show.isFestival && showTypes.includes("festival")) {
+      return true;
+    }
+
+    if (!show.isFestival && showTypes.includes("regular")) {
+      return true;
+    }
+
+    return false;
+  }
+
+  function filterOnGerne(
+    show: Awaited<ReturnType<typeof api.show.getAll>>[number],
+  ) {
+    if (genres.length === 0) {
+      return true;
+    }
+
+    return getGenresOfShow(show).some((g) => genres.includes(g));
+  }
+
+  function filterOnSearch(
+    show: Awaited<ReturnType<typeof api.show.getAll>>[number],
+  ) {
     const searchString = searchParam?.toLowerCase() ?? "";
     const showName = show.name.toLowerCase();
     const city = show.location.city.toLowerCase();
     const country = show.location.country.toLowerCase();
 
-    if (!genres.length) {
-      return [showName, city, country].some((i) => i.includes(searchString));
-    }
+    return [showName, city, country].some((i) => i.includes(searchString));
+  }
 
-    return (
-      getGenres(show).some((g) => genres.includes(g)) &&
-      showName.includes(searchString)
-    );
-  });
+  const filteredShows = [...shows]
+    .filter(filterOnType)
+    .filter(filterOnGerne)
+    .filter(filterOnSearch);
 
   return shows.length > 0 ? (
     <table className="table-auto bg-white/10 text-left text-xs text-white ">
@@ -88,7 +118,7 @@ export default function Overview({
               {show.isFestival ? "festival" : "regular show"}
             </td>
             <td className="flex gap-2 px-4 py-2">
-              {getGenres(show).map((g) => (
+              {getGenresOfShow(show).map((g) => (
                 <Link key={g} href={`/bands?genre=${g.replaceAll(" ", "+")}`}>
                   <GenreBadge
                     genre={g}
