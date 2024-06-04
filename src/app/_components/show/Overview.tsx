@@ -70,16 +70,18 @@ export default function Overview({
     .filter(filterOnSearch);
 
   return shows.length > 0 ? (
-    <table className="table-auto bg-white/10 text-left text-xs text-white ">
+    <table className="table-fixed bg-white/10 text-left text-xs text-white ">
       <thead className="uppercase">
         <tr>
-          <th className="border-b-2 border-gray-500 px-4 py-2">Date</th>
-          <th className="border-b-2 border-gray-500 px-4 py-2">Name</th>
-          <th className="border-b-2 border-gray-500 px-4 py-2">Bands</th>
-          <th className="border-b-2 border-gray-500 px-4 py-2">City</th>
-          <th className="border-b-2 border-gray-500 px-4 py-2">Country</th>
-          <th className="border-b-2 border-gray-500 px-4 py-2">Type</th>
-          <th className="border-b-2 border-gray-500 px-4 py-2">Genre</th>
+          <th className="w-1/12 border-b-2 border-gray-500 px-4 py-2">Date</th>
+          <th className="w-1/12 border-b-2 border-gray-500 px-4 py-2">Name</th>
+          <th className="w-2/12 border-b-2 border-gray-500 px-4 py-2">Bands</th>
+          <th className="w-1/12 border-b-2 border-gray-500 px-4 py-2">City</th>
+          <th className="w-1/12 border-b-2 border-gray-500 px-4 py-2">
+            Country
+          </th>
+          <th className="w-1/12 border-b-2 border-gray-500 px-4 py-2">Type</th>
+          <th className="w-4/12 border-b-2 border-gray-500 px-4 py-2">Genre</th>
         </tr>
       </thead>
       <tbody>
