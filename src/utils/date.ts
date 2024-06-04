@@ -16,3 +16,8 @@ export function getYearsForSelect() {
 
   return years;
 }
+
+export function getRandomYear() {
+  const currentYear = new Date().getFullYear();
+  return Math.floor(Math.random() * (currentYear - 1950 + 1)) + 1950;
+}

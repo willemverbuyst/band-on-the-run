@@ -1,7 +1,6 @@
 import { PrismaClient } from "@prisma/client";
-import { getRandomGenres } from "~/utils/genre";
+import { getBands } from "~/utils/dummyData";
 import { getRandomShowType } from "~/utils/showType";
-import { bands } from "./development/bands";
 import { shows } from "./development/shows";
 
 const prisma = new PrismaClient();
@@ -12,13 +11,14 @@ async function main() {
   await prisma.band.deleteMany();
 
   const bandIds: string[] = [];
+  const bands = getBands();
 
   for (const b of bands) {
     const band = await prisma.band.create({
       data: {
         name: b.name,
         bio: b.bio,
-        genre: getRandomGenres(),
+        genre: b.genre,
         foundedYear: b.foundedYear,
         country: b.country,
       },
