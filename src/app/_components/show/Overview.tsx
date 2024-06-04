@@ -31,9 +31,11 @@ export default function Overview({
 
     const searchString = searchParam?.toLowerCase() ?? "";
     const showName = show.name.toLowerCase();
+    const city = show.location.city.toLowerCase();
+    const country = show.location.country.toLowerCase();
 
     if (!genres.length) {
-      return showName.includes(searchString);
+      return [showName, city, country].some((i) => i.includes(searchString));
     }
 
     return (
