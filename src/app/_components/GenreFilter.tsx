@@ -12,10 +12,10 @@ export default function GenreFilter() {
 
   const genres = useMemo(() => getUniqueGenres(), []);
 
-  function handleClick(genre: string) {
-    const params = new URLSearchParams(searchParams);
-    const currentGenres = params.get("genre")?.toString().split(",") ?? [];
+  const params = new URLSearchParams(searchParams);
+  const currentGenres = params.get("genre")?.toString().split(",") ?? [];
 
+  function handleClick(genre: string) {
     if (!currentGenres.includes(genre)) {
       currentGenres.push(genre);
     } else {
@@ -29,6 +29,11 @@ export default function GenreFilter() {
       params.delete("genre");
     }
 
+    router.replace(`${pathname}?${params.toString()}`);
+  }
+
+  function clearFilter() {
+    params.delete("genre");
     router.replace(`${pathname}?${params.toString()}`);
   }
 
@@ -46,6 +51,11 @@ export default function GenreFilter() {
           />
         </button>
       ))}
+      {currentGenres.length > 0 && (
+        <button onClick={clearFilter}>
+          <span className="rounded-xl bg-gray-500 px-2 py-1 text-xs">x</span>
+        </button>
+      )}
     </section>
   );
 }
