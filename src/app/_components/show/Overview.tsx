@@ -33,15 +33,11 @@ export default function Overview({
       return false;
     }
 
-    if (showTypes.length === 2) {
+    if (showTypes.length === 4) {
       return true;
     }
 
-    if (show.isFestival && showTypes.includes("festival")) {
-      return true;
-    }
-
-    if (!show.isFestival && showTypes.includes("regular")) {
+    if (showTypes.includes(show.showType)) {
       return true;
     }
 
@@ -114,9 +110,7 @@ export default function Overview({
             </td>
             <td className="px-4 py-2">{show.location.city}</td>
             <td className="px-4 py-2">{show.location.country}</td>
-            <td className="px-4 py-2 text-xs text-gray-500">
-              {show.isFestival ? "festival" : "regular show"}
-            </td>
+            <td className="px-4 py-2 text-xs text-gray-500">{show.showType}</td>
             <td className="flex gap-2 px-4 py-2">
               {getGenresOfShow(show).map((g) => (
                 <Link key={g} href={`/bands?genre=${g.replaceAll(" ", "+")}`}>

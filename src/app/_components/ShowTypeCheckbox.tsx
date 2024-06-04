@@ -1,5 +1,6 @@
 "use client";
 
+import { ShowType } from "@prisma/client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
 
@@ -7,14 +8,20 @@ export default function ShowTypeCheckbox() {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
+  const showTypes = [
+    ShowType.CLUB,
+    ShowType.FESTIVAL,
+    ShowType.RADIO,
+    ShowType.TV,
+  ] as const;
 
   useEffect(() => {
     const params = new URLSearchParams(searchParams);
-    params.set("type", ["festival", "regular"].join(","));
+    params.set("type", showTypes.join(","));
     router.replace(`${pathname}?${params.toString()}`);
   }, []);
 
-  function handleCheck(type: "festival" | "regular") {
+  function handleCheck(type: ShowType) {
     const params = new URLSearchParams(searchParams);
     const currentTypes = params.get("type")?.toString().split(",") ?? [];
 
@@ -36,30 +43,20 @@ export default function ShowTypeCheckbox() {
 
   return (
     <section>
-      <section className="flex gap-2">
-        <input
-          id="festival"
-          type="checkbox"
-          checked={
-            !!searchParams.get("type") &&
-            searchParams.get("type")?.toString().split(",").includes("festival")
-          }
-          onChange={() => handleCheck("festival")}
-        />
-        <label htmlFor="festival">Festival</label>
-      </section>
-      <section className="flex gap-2">
-        <input
-          id="regular"
-          type="checkbox"
-          checked={
-            !!searchParams.get("type") &&
-            searchParams.get("type")?.toString().split(",").includes("regular")
-          }
-          onChange={() => handleCheck("regular")}
-        />
-        <label htmlFor="regular">Regular Show</label>
-      </section>
+      {showTypes.map((st) => (
+        <section className="flex gap-2">
+          <input
+            id={st}
+            type="checkbox"
+            checked={
+              !!searchParams.get("type") &&
+              searchParams.get("type")?.toString().split(",").includes(st)
+            }
+            onChange={() => handleCheck(st)}
+          />
+          <label htmlFor={st}>{st}</label>
+        </section>
+      ))}
     </section>
   );
 }

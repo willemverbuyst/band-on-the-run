@@ -32,14 +32,14 @@ type Location {
 }
 
 model Show {
-    id         String     @id @default(auto()) @map("_id") @db.ObjectId
-    name       String
-    date       DateTime
-    isFestival Boolean
-    location   Location
-    createdAt  DateTime   @default(now())
-    updatedAt  DateTime   @updatedAt
-    bandShows  BandShow[]
+    id        String     @id @default(auto()) @map("_id") @db.ObjectId
+    name      String
+    date      DateTime
+    showType  ShowType
+    location  Location
+    createdAt DateTime   @default(now())
+    updatedAt DateTime   @updatedAt
+    bandShows BandShow[]
 }
 
 model BandShow {
@@ -50,4 +50,11 @@ model BandShow {
     show   Show   @relation(fields: [showId], references: [id])
 
     @@index([bandId, showId], name: "band_show_index")
+}
+
+enum ShowType {
+    FESTIVAL
+    CLUB
+    TV
+    RADIO
 }
