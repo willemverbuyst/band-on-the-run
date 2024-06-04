@@ -2,7 +2,6 @@
 
 import type { ShowType } from "@prisma/client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
 import { showTypes } from "~/utils/showType";
 
 export default function ShowTypeCheckbox() {
@@ -10,29 +9,21 @@ export default function ShowTypeCheckbox() {
   const pathname = usePathname();
   const router = useRouter();
 
-  useEffect(() => {
+  function handleCheck(showType: ShowType) {
     const params = new URLSearchParams(searchParams);
-    params.set("type", showTypes.join(","));
-    router.replace(`${pathname}?${params.toString()}`);
-  }, [pathname, router, searchParams]);
-
-  function handleCheck(type: ShowType) {
-    const params = new URLSearchParams(searchParams);
-    const currentTypes = params.get("type")?.toString().split(",") ?? [];
-
-    if (!currentTypes.includes(type)) {
-      currentTypes.push(type);
+    const currentTypes = params.get("showType")?.toString().split(",") ?? [];
+    console.log(currentTypes);
+    if (!currentTypes.includes(showType)) {
+      currentTypes.push(showType);
     } else {
-      const index = currentTypes.indexOf(type);
+      const index = currentTypes.indexOf(showType);
       currentTypes.splice(index, 1);
     }
-
     if (currentTypes.length) {
-      params.set("type", currentTypes.join(","));
+      params.set("showType", currentTypes.join(","));
     } else {
-      params.delete("type");
+      params.delete("showType");
     }
-
     router.replace(`${pathname}?${params.toString()}`);
   }
 
@@ -44,8 +35,8 @@ export default function ShowTypeCheckbox() {
             id={st}
             type="checkbox"
             checked={
-              !!searchParams.get("type") &&
-              searchParams.get("type")?.toString().split(",").includes(st)
+              !!searchParams.get("showType") &&
+              searchParams.get("showType")?.toString().split(",").includes(st)
             }
             onChange={() => handleCheck(st)}
           />

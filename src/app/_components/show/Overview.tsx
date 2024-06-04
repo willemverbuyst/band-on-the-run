@@ -16,7 +16,7 @@ export default function Overview({
   const searchParams = useSearchParams();
   const genreParam = searchParams.get("genre")?.split(",") ?? [];
   const searchParam = searchParams.get("search");
-  const showTypeParam = searchParams.get("type")?.split(",") ?? [];
+  const showTypeParam = searchParams.get("showType")?.split(",") ?? [];
 
   function getGenresOfShow(
     show: Awaited<ReturnType<typeof api.show.getAll>>[number],

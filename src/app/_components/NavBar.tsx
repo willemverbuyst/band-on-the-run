@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getServerAuthSession } from "~/server/auth";
+import { showTypes } from "~/utils/showType";
 
 export default async function NavBar() {
   const session = await getServerAuthSession();
@@ -12,7 +13,13 @@ export default async function NavBar() {
         </Link>
       </nav>
       <nav className="flex items-center justify-center">
-        <Link href="/shows" className="px-5">
+        <Link
+          href={{
+            pathname: "/shows",
+            query: { showType: showTypes.join(",") },
+          }}
+          className="px-5"
+        >
           Shows
         </Link>
         <Link href="/bands" className="px-5">
