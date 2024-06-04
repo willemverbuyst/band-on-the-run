@@ -1,25 +1,20 @@
 "use client";
 
-import { ShowType } from "@prisma/client";
+import { type ShowType } from "@prisma/client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
+import { showTypes } from "~/utils/showType";
 
 export default function ShowTypeCheckbox() {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
-  const showTypes = [
-    ShowType.CLUB,
-    ShowType.FESTIVAL,
-    ShowType.RADIO,
-    ShowType.TV,
-  ] as const;
 
   useEffect(() => {
     const params = new URLSearchParams(searchParams);
     params.set("type", showTypes.join(","));
     router.replace(`${pathname}?${params.toString()}`);
-  }, []);
+  }, [pathname, router, searchParams]);
 
   function handleCheck(type: ShowType) {
     const params = new URLSearchParams(searchParams);

@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import React from "react";
 import { type api } from "~/trpc/server";
 import { formatDate } from "~/utils/date";
+import { showTypes } from "~/utils/showType";
 import GenreBadge from "../GenreBadge";
 
 export default function Overview({
@@ -13,11 +14,9 @@ export default function Overview({
   shows: Awaited<ReturnType<typeof api.show.getAll>>;
 }) {
   const searchParams = useSearchParams();
-  const genreParam = searchParams.get("genre");
+  const genreParam = searchParams.get("genre")?.split(",") ?? [];
   const searchParam = searchParams.get("search");
-  const showTypeParam = searchParams.get("type");
-  const genres = genreParam?.split(",") ?? [];
-  const showTypes = showTypeParam?.split(",") ?? [];
+  const showTypeParam = searchParams.get("type")?.split(",") ?? [];
 
   function getGenresOfShow(
     show: Awaited<ReturnType<typeof api.show.getAll>>[number],
@@ -29,29 +28,29 @@ export default function Overview({
   function filterOnType(
     show: Awaited<ReturnType<typeof api.show.getAll>>[number],
   ) {
-    if (showTypes.length === 0) {
+    if (showTypeParam.length === 0) {
       return false;
     }
 
-    if (showTypes.length === 4) {
+    if (showTypeParam.length === showTypes.length) {
       return true;
     }
 
-    if (showTypes.includes(show.showType)) {
+    if (showTypeParam.includes(show.showType)) {
       return true;
     }
 
     return false;
   }
 
-  function filterOnGerne(
+  function filterOnGenre(
     show: Awaited<ReturnType<typeof api.show.getAll>>[number],
   ) {
-    if (genres.length === 0) {
+    if (genreParam.length === 0) {
       return true;
     }
 
-    return getGenresOfShow(show).some((g) => genres.includes(g));
+    return getGenresOfShow(show).some((g) => genreParam.includes(g));
   }
 
   function filterOnSearch(
@@ -67,7 +66,7 @@ export default function Overview({
 
   const filteredShows = [...shows]
     .filter(filterOnType)
-    .filter(filterOnGerne)
+    .filter(filterOnGenre)
     .filter(filterOnSearch);
 
   return shows.length > 0 ? (
