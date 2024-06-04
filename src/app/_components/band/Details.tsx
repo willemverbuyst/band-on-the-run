@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { type api } from "~/trpc/server";
+import type { api } from "~/trpc/server";
 import GenreBadge from "../GenreBadge";
 import PageTitle from "../PageTitle";
 
@@ -57,7 +57,7 @@ export default function Details({
                 <td className="px-4 py-2">{show.location.city}</td>
                 <td className="px-4 py-2">{show.location.country}</td>
                 <td className="px-4 py-2 text-xs text-gray-500">
-                  {show.isFestival ? "festival" : "regular show"}
+                  {show.showType}
                 </td>
               </tr>
             ))}

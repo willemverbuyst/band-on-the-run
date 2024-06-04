@@ -1,6 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { bands } from "./development/bands";
-import { shows } from "./development/shows";
+import { getBands, getShows } from "~/utils/dummyData";
 
 const prisma = new PrismaClient();
 
@@ -10,6 +9,7 @@ async function main() {
   await prisma.band.deleteMany();
 
   const bandIds: string[] = [];
+  const bands = getBands();
 
   for (const b of bands) {
     const band = await prisma.band.create({
@@ -25,12 +25,14 @@ async function main() {
   }
 
   const showIds: string[] = [];
+  const shows = getShows();
+
   for (const s of shows) {
     const show = await prisma.show.create({
       data: {
         name: s.name,
-        date: new Date(s.date),
-        isFestival: s.isFestival,
+        date: s.date,
+        showType: s.showType,
         location: s.location,
       },
     });

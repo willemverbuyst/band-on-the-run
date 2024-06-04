@@ -18,7 +18,7 @@ model Band {
     id          String     @id @default(auto()) @map("_id") @db.ObjectId
     name        String     @unique
     bio         String?
-    genre       String[]
+    genre       Genre[]
     foundedYear Int
     country     String
     createdAt   DateTime   @default(now())
@@ -32,14 +32,14 @@ type Location {
 }
 
 model Show {
-    id         String     @id @default(auto()) @map("_id") @db.ObjectId
-    name       String
-    date       DateTime
-    isFestival Boolean
-    location   Location
-    createdAt  DateTime   @default(now())
-    updatedAt  DateTime   @updatedAt
-    bandShows  BandShow[]
+    id        String     @id @default(auto()) @map("_id") @db.ObjectId
+    name      String
+    date      DateTime
+    showType  ShowType
+    location  Location
+    createdAt DateTime   @default(now())
+    updatedAt DateTime   @updatedAt
+    bandShows BandShow[]
 }
 
 model BandShow {
@@ -50,4 +50,33 @@ model BandShow {
     show   Show   @relation(fields: [showId], references: [id])
 
     @@index([bandId, showId], name: "band_show_index")
+}
+
+enum ShowType {
+    CLUB
+    FESTIVAL
+    RADIO
+    TV
+}
+
+enum Genre {
+    ALTERNATIVE_ROCK
+    ELECTRONIC
+    EXPERIMENTAL
+    FOLK
+    FOLK_ROCK
+    HEAVY_METAL
+    INDIE_FOLK
+    INDIE_ROCK
+    POST_METAL
+    POST_PUNK
+    POST_ROCK
+    POP_ROCK
+    PROGRESSIVE_METAL
+    PROGRESSIVE_ROCK
+    SPACE_ROCK
+    SYNTH_POP
+    SYNTH_WAVE
+    SYMPHONIC_METAL
+    DREAM_POP
 }
