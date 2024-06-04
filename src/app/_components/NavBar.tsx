@@ -14,9 +14,6 @@ export default async function NavBar() {
         </h1>
       </section>
       <nav className="flex items-center justify-center">
-        <Link href="/" className="px-5">
-          Home
-        </Link>
         <Link href="/shows" className="px-5">
           Shows
         </Link>

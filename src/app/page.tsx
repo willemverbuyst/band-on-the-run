@@ -9,7 +9,7 @@ export default async function Home() {
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
           <Link
             className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
-            href="shows"
+            href="/shows"
           >
             <h3 className="text-2xl font-bold">Fans →</h3>
             <div className="text-lg">
@@ -19,7 +19,7 @@ export default async function Home() {
           </Link>
           <Link
             className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
-            href="bands"
+            href="/admin"
           >
             <h3 className="text-2xl font-bold">Bands →</h3>
             <div className="text-lg">
