@@ -13,7 +13,7 @@ export default function Card({
         <Link href={`/bands/${band.id}`}>{band.name}</Link>
       </h3>
       <p className="line-clamp-2">{band.bio}</p>
-      <section className="flex gap-2">
+      <section className="flex flex-wrap gap-2">
         {band.genre.map((g) => (
           <Link key={g} href={`/bands?genre=${g.replaceAll(" ", "+")}`}>
             <GenreBadge key={g} genre={g} customStyle="bg-zinc-950" />

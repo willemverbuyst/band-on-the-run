@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
-import { showTypes } from "~/utils/showType";
+import { getRandomGenres } from "~/utils/genre";
+import { getRandomShowType } from "~/utils/showType";
 import { bands } from "./development/bands";
 import { shows } from "./development/shows";
 
@@ -17,7 +18,7 @@ async function main() {
       data: {
         name: b.name,
         bio: b.bio,
-        genre: b.genre,
+        genre: getRandomGenres(),
         foundedYear: b.foundedYear,
         country: b.country,
       },
@@ -32,7 +33,7 @@ async function main() {
       data: {
         name: s.name,
         date: new Date(s.date),
-        showType: showTypes[Math.floor(Math.random() * showTypes.length)]!,
+        showType: getRandomShowType(),
         location: s.location,
       },
     });

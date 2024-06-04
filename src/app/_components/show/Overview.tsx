@@ -110,7 +110,7 @@ export default function Overview({
             <td className="px-4 py-2">{show.location.city}</td>
             <td className="px-4 py-2">{show.location.country}</td>
             <td className="px-4 py-2 text-xs text-gray-500">{show.showType}</td>
-            <td className="flex gap-2 px-4 py-2">
+            <td className="flex flex-wrap gap-2 px-4 py-2">
               {getGenresOfShow(show).map((g) => (
                 <Link key={g} href={`/bands?genre=${g.replaceAll(" ", "+")}`}>
                   <GenreBadge

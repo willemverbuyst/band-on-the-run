@@ -1,8 +1,8 @@
 "use client";
 
+import type { Genre } from "@prisma/client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useMemo } from "react";
-import { getUniqueGenres } from "~/utils/genre";
+import { genres } from "~/utils/genre";
 import GenreBadge from "./GenreBadge";
 
 export default function GenreFilter() {
@@ -10,12 +10,10 @@ export default function GenreFilter() {
   const pathname = usePathname();
   const router = useRouter();
 
-  const genres = useMemo(() => getUniqueGenres(), []);
-
   const params = new URLSearchParams(searchParams);
   const currentGenres = params.get("genre")?.toString().split(",") ?? [];
 
-  function handleClick(genre: string) {
+  function handleClick(genre: Genre) {
     if (!currentGenres.includes(genre)) {
       currentGenres.push(genre);
     } else {

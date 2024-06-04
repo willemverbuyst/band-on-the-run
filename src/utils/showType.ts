@@ -6,3 +6,7 @@ export const showTypes = [
   ShowType.RADIO,
   ShowType.TV,
 ] as const;
+
+export function getRandomShowType(): ShowType {
+  return showTypes[Math.floor(Math.random() * showTypes.length)]!;
+}

@@ -7,7 +7,7 @@ export default function GenreBadge({
 }) {
   return (
     <span className={`rounded-xl bg-cyan-500 px-2 py-1 text-xs ${customStyle}`}>
-      {genre}
+      {genre.replace(/_/g, " ").toLocaleLowerCase()}
     </span>
   );
 }
