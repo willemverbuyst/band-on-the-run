@@ -5,3 +5,14 @@ export function formatDate(date: Date) {
 
   return `${year}-${String(month).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
 }
+
+export function getYearsForSelect() {
+  let years = [];
+  const currentYear = new Date().getFullYear();
+
+  for (let i = 1950; i <= currentYear; i++) {
+    years.push(i);
+  }
+
+  return years;
+}
