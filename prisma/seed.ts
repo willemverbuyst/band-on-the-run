@@ -1,7 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { getBands } from "~/utils/dummyData";
-import { getRandomShowType } from "~/utils/showType";
-import { shows } from "./development/shows";
+import { getBands, getShows } from "~/utils/dummyData";
 
 const prisma = new PrismaClient();
 
@@ -27,13 +25,14 @@ async function main() {
   }
 
   const showIds: string[] = [];
+  const shows = getShows();
 
   for (const s of shows) {
     const show = await prisma.show.create({
       data: {
         name: s.name,
-        date: new Date(s.date),
-        showType: getRandomShowType(),
+        date: s.date,
+        showType: s.showType,
         location: s.location,
       },
     });

@@ -1,10 +1,11 @@
 import { faker } from "@faker-js/faker";
-import type { Genre } from "@prisma/client";
+import type { Genre, ShowType } from "@prisma/client";
 import { getRandomYear } from "./date";
 import { getRandomGenres } from "./genre";
+import { getRandomShowType } from "./showType";
 import { capitalizeEachWord } from "./string";
 
-export function getName() {
+export function getBandName() {
   const animal = faker.animal.type();
   const color = faker.color.human();
 
@@ -15,11 +16,22 @@ export function getName() {
   return capitalizeEachWord(`${color} ${animal}`);
 }
 
+export function getShowName() {
+  const fuel = faker.vehicle.fuel();
+  const productMaterial = faker.commerce.productMaterial();
+
+  if (Math.random() > 0.5) {
+    return capitalizeEachWord(productMaterial);
+  }
+
+  return capitalizeEachWord(`${fuel} ${productMaterial}`);
+}
+
 export function getBands() {
   const bands = new Map();
 
-  while (bands.size < 10) {
-    const name = getName();
+  while (bands.size < 20) {
+    const name = getBandName();
 
     if (bands.has(name)) continue;
 
@@ -40,5 +52,34 @@ export function getBands() {
     genre: Genre[];
     foundedYear: number;
     country: string;
+  }[];
+}
+
+export function getShows() {
+  const shows = new Map();
+
+  while (shows.size < 30) {
+    const name = getShowName();
+
+    if (shows.has(name)) continue;
+
+    const show = {
+      name,
+      date: faker.date.future(),
+      showType: getRandomShowType(),
+      location: {
+        city: faker.location.city(),
+        country: faker.location.country(),
+      },
+    };
+
+    shows.set(show.name, show);
+  }
+
+  return Array.from(shows.values()) as {
+    name: string;
+    date: string;
+    showType: ShowType;
+    location: { city: string; country: string };
   }[];
 }

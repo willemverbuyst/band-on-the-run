@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
+import { genres } from "~/utils/genre";
 
 export const bandRouter = createTRPCRouter({
   create: publicProcedure
@@ -10,7 +11,7 @@ export const bandRouter = createTRPCRouter({
         bio: z.string().optional(),
         foundedYear: z.number(),
         country: z.string(),
-        genre: z.array(z.string()),
+        genre: z.array(z.enum([...genres])),
       }),
     )
     .mutation(async ({ ctx, input }) => {

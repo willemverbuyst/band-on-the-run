@@ -7,13 +7,13 @@ import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
 import { api } from "~/trpc/react";
 import { getYearsForSelect } from "~/utils/date";
-import { getUniqueGenres } from "~/utils/genre";
+import { genres } from "~/utils/genre";
 import type { BandSchema } from "~/validationSchema/band";
 import { bandSchema } from "~/validationSchema/band";
 
 export function CreateBand() {
   const router = useRouter();
-  const genres = useMemo(() => getUniqueGenres(), []);
+
   const years = useMemo(() => getYearsForSelect(), []);
 
   const {
