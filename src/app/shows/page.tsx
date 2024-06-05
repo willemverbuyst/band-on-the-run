@@ -5,6 +5,12 @@ import Search from "../_components/Search";
 import ShowTypeCheckbox from "../_components/ShowTypeCheckbox";
 import Overview from "../_components/show/Overview";
 
+export const metadata = {
+  title: "bandOnTheRun | Shows",
+  description: "Overview of all shows.",
+  icons: [{ rel: "icon", url: "/favicon.ico" }],
+};
+
 export default async function Page() {
   const shows = await api.show.getAll();
 

@@ -2,6 +2,12 @@ import Link from "next/link";
 import { getServerAuthSession } from "~/server/auth";
 import PageTitle from "../_components/PageTitle";
 
+export const metadata = {
+  title: "bandOnTheRun | Admin",
+  description: "Admin page.",
+  icons: [{ rel: "icon", url: "/favicon.ico" }],
+};
+
 export default async function Page() {
   const session = await getServerAuthSession();
 
