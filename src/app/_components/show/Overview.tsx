@@ -6,7 +6,6 @@ import React from "react";
 import type { api } from "~/trpc/server";
 import { formatDate } from "~/utils/date";
 import { showTypes } from "~/utils/showType";
-import GenreBadge from "../GenreBadge";
 
 export default function Overview({
   shows,
@@ -73,15 +72,14 @@ export default function Overview({
     <table className="table-fixed bg-white/10 text-left text-xs text-white ">
       <thead className="uppercase">
         <tr>
-          <th className="w-1/12 border-b-2 border-gray-500 px-4 py-2">Date</th>
-          <th className="w-1/12 border-b-2 border-gray-500 px-4 py-2">Name</th>
-          <th className="w-2/12 border-b-2 border-gray-500 px-4 py-2">Bands</th>
-          <th className="w-1/12 border-b-2 border-gray-500 px-4 py-2">City</th>
-          <th className="w-1/12 border-b-2 border-gray-500 px-4 py-2">
+          <th className="w-1/7 border-b-2 border-gray-500 px-4 py-2">Date</th>
+          <th className="w-1/7 border-b-2 border-gray-500 px-4 py-2">Name</th>
+          <th className="w-2/7 border-b-2 border-gray-500 px-4 py-2">Bands</th>
+          <th className="w-1/7 border-b-2 border-gray-500 px-4 py-2">City</th>
+          <th className="w-1/7 border-b-2 border-gray-500 px-4 py-2">
             Country
           </th>
-          <th className="w-1/12 border-b-2 border-gray-500 px-4 py-2">Type</th>
-          <th className="w-4/12 border-b-2 border-gray-500 px-4 py-2">Genre</th>
+          <th className="w-1/7 border-b-2 border-gray-500 px-4 py-2">Type</th>
         </tr>
       </thead>
       <tbody>
@@ -112,16 +110,6 @@ export default function Overview({
             <td className="px-4 py-2">{show.location.city}</td>
             <td className="px-4 py-2">{show.location.country}</td>
             <td className="px-4 py-2 text-xs text-gray-500">{show.showType}</td>
-            <td className="flex flex-wrap gap-2 px-4 py-2">
-              {getGenresOfShow(show).map((g) => (
-                <Link key={g} href={`/bands?genre=${g.replaceAll(" ", "+")}`}>
-                  <GenreBadge
-                    genre={g}
-                    customStyle="bg-zinc-950 text-xs px-2 py-0"
-                  />
-                </Link>
-              ))}
-            </td>
           </tr>
         ))}
       </tbody>

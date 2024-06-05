@@ -19,6 +19,7 @@ export default function Details({
       <h3 className="text-center text-2xl">
         {show.location.city} - {show.location.country}
       </h3>
+      <h4 className="text-gray-500">{show.showType}</h4>
       <div className="flex flex-wrap justify-center gap-6">
         {show.bandShows.map(({ band }) => (
           <Card key={band.id} band={band} />
