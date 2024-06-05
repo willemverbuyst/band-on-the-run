@@ -1,8 +1,4 @@
 import { faker } from "@faker-js/faker";
-import type { Genre, ShowType } from "@prisma/client";
-import { getRandomYear } from "./date";
-import { getRandomGenres } from "./genre";
-import { getRandomShowType } from "./showType";
 import { capitalizeEachWord } from "./string";
 
 export function getBandName() {
@@ -25,61 +21,4 @@ export function getShowName() {
   }
 
   return capitalizeEachWord(`${fuel} ${productMaterial}`);
-}
-
-export function getBands() {
-  const bands = new Map();
-
-  while (bands.size < 20) {
-    const name = getBandName();
-
-    if (bands.has(name)) continue;
-
-    const band = {
-      name,
-      bio: faker.lorem.lines({ min: 2, max: 4 }),
-      genre: getRandomGenres(),
-      foundedYear: getRandomYear(),
-      country: faker.location.country(),
-    };
-
-    bands.set(band.name, band);
-  }
-
-  return Array.from(bands.values()) as {
-    name: string;
-    bio: string;
-    genre: Genre[];
-    foundedYear: number;
-    country: string;
-  }[];
-}
-
-export function getShows() {
-  const shows = new Map();
-
-  while (shows.size < 30) {
-    const name = getShowName();
-
-    if (shows.has(name)) continue;
-
-    const show = {
-      name,
-      date: faker.date.future(),
-      showType: getRandomShowType(),
-      location: {
-        city: faker.location.city(),
-        country: faker.location.country(),
-      },
-    };
-
-    shows.set(show.name, show);
-  }
-
-  return Array.from(shows.values()) as {
-    name: string;
-    date: string;
-    showType: ShowType;
-    location: { city: string; country: string };
-  }[];
 }
