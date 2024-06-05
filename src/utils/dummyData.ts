@@ -29,8 +29,9 @@ export function getShowName() {
 
 export function getBands() {
   const bands = new Map();
+  const NUMBER_OF_BANDS = 20;
 
-  while (bands.size < 20) {
+  while (bands.size < NUMBER_OF_BANDS) {
     const name = getBandName();
 
     if (bands.has(name)) continue;
@@ -57,8 +58,9 @@ export function getBands() {
 
 export function getShows() {
   const shows = new Map();
+  const NUMBER_OF_SHOWS = 30;
 
-  while (shows.size < 30) {
+  while (shows.size < NUMBER_OF_SHOWS) {
     const name = getShowName();
 
     if (shows.has(name)) continue;
@@ -82,4 +84,22 @@ export function getShows() {
     showType: ShowType;
     location: { city: string; country: string };
   }[];
+}
+
+export function getBandShows(bandIds: string[], showIds: string[]) {
+  const bandShow = new Map();
+  const MAX_NUMBER_OF_BANDS_PER_SHOW = 3;
+
+  showIds.forEach((showId) => {
+    const randomBandIds = [...bandIds].sort(() => Math.random() - 0.5);
+    const randomBandsPerShowCount =
+      Math.floor(Math.random() * MAX_NUMBER_OF_BANDS_PER_SHOW) + 1;
+    const randomBands = randomBandIds.slice(0, randomBandsPerShowCount);
+
+    randomBands.forEach((bandId) => {
+      bandShow.set(Symbol(showId), { bandId, showId });
+    });
+  });
+
+  return Array.from(bandShow.values()) as { bandId: string; showId: string }[];
 }

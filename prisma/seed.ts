@@ -1,5 +1,5 @@
 import { PrismaClient } from "@prisma/client";
-import { getBands, getShows } from "~/utils/dummyData";
+import { getBandShows, getBands, getShows } from "~/utils/dummyData";
 
 const prisma = new PrismaClient();
 
@@ -39,23 +39,15 @@ async function main() {
     showIds.push(show.id);
   }
 
-  for (let i = 0; i < 50; i++) {
-    const bandShow = new Set();
-    const randomBandId = bandIds.sort(() => Math.random() - 0.5)[0] ?? "";
-    const randomShowId = showIds.sort(() => Math.random() - 0.5)[0] ?? "";
+  const bandShows = getBandShows(bandIds, showIds);
 
-    // to prevent duplicate shows for a band
-    if (bandShow.has(`${randomBandId}-${randomShowId}`)) {
-      return;
-    } else {
-      bandShow.add(`${randomBandId}-${randomShowId}`);
-      await prisma.bandShow.create({
-        data: {
-          bandId: randomBandId,
-          showId: randomShowId,
-        },
-      });
-    }
+  for (const bs of bandShows) {
+    await prisma.bandShow.create({
+      data: {
+        bandId: bs.bandId,
+        showId: bs.showId,
+      },
+    });
   }
 }
 
