@@ -27,8 +27,8 @@ export function CreateBand() {
 
   const createBand = api.band.create.useMutation({
     onSuccess: () => {
-      router.refresh();
       reset();
+      router.push("/bands");
     },
   });
 
