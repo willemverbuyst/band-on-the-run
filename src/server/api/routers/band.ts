@@ -1,7 +1,7 @@
 import { z } from "zod";
 
+import { genres } from "~/lib/genre";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { genres } from "~/utils/genre";
 
 export const bandRouter = createTRPCRouter({
   create: publicProcedure

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import PageTitle from "~/components/page-title";
-import { showTypes } from "~/utils/showType";
+import { showTypes } from "~/lib/showType";
 
 export default async function Home() {
   return (

@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { showTypes } from "~/lib/showType";
 import { cn } from "~/lib/utils";
-import { showTypes } from "~/utils/showType";
 import { Icons } from "../icons";
 
 export default function MainNav() {

@@ -2,7 +2,7 @@
 
 import type { ShowType } from "@prisma/client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { showTypes } from "~/utils/showType";
+import { showTypes } from "~/lib/showType";
 
 export default function ShowTypeCheckbox() {
   const searchParams = useSearchParams();

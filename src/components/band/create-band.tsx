@@ -5,9 +5,9 @@ import { useRouter } from "next/navigation";
 import { useMemo } from "react";
 import type { SubmitHandler } from "react-hook-form";
 import { useForm } from "react-hook-form";
+import { getYearsForSelect } from "~/lib/date";
+import { genres } from "~/lib/genre";
 import { api } from "~/trpc/react";
-import { getYearsForSelect } from "~/utils/date";
-import { genres } from "~/utils/genre";
 import type { BandSchema } from "~/validationSchema/band";
 import { bandSchema } from "~/validationSchema/band";
 

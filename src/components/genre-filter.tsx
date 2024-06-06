@@ -3,7 +3,7 @@
 import type { Genre } from "@prisma/client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Badge } from "~/components/ui/badge";
-import { genres } from "~/utils/genre";
+import { genres } from "~/lib/genre";
 
 export default function GenreFilter() {
   const searchParams = useSearchParams();

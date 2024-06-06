@@ -11,9 +11,9 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/table";
+import { formatDate } from "~/lib/date";
+import { showTypes } from "~/lib/showType";
 import type { api } from "~/trpc/server";
-import { formatDate } from "~/utils/date";
-import { showTypes } from "~/utils/showType";
 
 export default function Overview({
   shows,

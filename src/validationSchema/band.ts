@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { genres } from "~/utils/genre";
+import { genres } from "~/lib/genre";
 
 export const bandSchema = z.object({
   name: z.string().min(1, { message: "name is required" }),

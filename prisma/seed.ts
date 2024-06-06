@@ -1,9 +1,9 @@
 import { faker } from "@faker-js/faker";
 import { PrismaClient } from "@prisma/client";
-import { getRandomYear } from "~/utils/date";
+import { getRandomYear } from "~/lib/date";
+import { getRandomGenres } from "~/lib/genre";
+import { getRandomShowType } from "~/lib/showType";
 import { getBandName, getShowName } from "~/utils/dummyData";
-import { getRandomGenres } from "~/utils/genre";
-import { getRandomShowType } from "~/utils/showType";
 
 const prisma = new PrismaClient();
 
