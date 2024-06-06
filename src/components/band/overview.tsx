@@ -2,7 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 import type { api } from "~/trpc/server";
-import Card from "../band-card";
+import BandCard from "../band-card";
 
 export default function Overview({
   bands,
@@ -42,7 +42,7 @@ export default function Overview({
   return (
     <div className="flex flex-wrap justify-center gap-6">
       {filteredBands.map((band) => (
-        <Card key={band.id} band={band} />
+        <BandCard key={band.id} band={band} />
       ))}
     </div>
   );

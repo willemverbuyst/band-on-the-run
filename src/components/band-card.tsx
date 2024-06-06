@@ -1,19 +1,30 @@
 import Link from "next/link";
 import { Badge } from "~/components/ui/badge";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "~/components/ui/card";
 import type { api } from "~/trpc/server";
 
-export default function Card({
+export default function BandCard({
   band,
 }: {
   band: Awaited<ReturnType<typeof api.band.getAll>>[number];
 }) {
   return (
-    <section className="flex min-w-[400px] max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20">
-      <h3>
-        <Link href={`/bands/${band.id}`}>{band.name}</Link>
-      </h3>
-      <p className="line-clamp-2">{band.bio}</p>
-      <section className="flex flex-wrap gap-2">
+    <Card className="w-[400px]">
+      <CardHeader>
+        <CardTitle>
+          <Link href={`/bands/${band.id}`}>{band.name}</Link>
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <p className="line-clamp-2">{band.bio}</p>
+      </CardContent>
+      <CardFooter className="flex flex-wrap gap-2">
         {band.genre.map((g) => (
           <Link key={g} href={`/bands?genre=${g.replaceAll(" ", "+")}`}>
             <Badge variant="secondary">
@@ -21,7 +32,7 @@ export default function Card({
             </Badge>
           </Link>
         ))}
-      </section>
-    </section>
+      </CardFooter>
+    </Card>
   );
 }

@@ -1,6 +1,6 @@
 import { formatDate } from "~/lib/date";
 import type { api } from "~/trpc/server";
-import Card from "../band-card";
+import BandCard from "../band-card";
 import PageTitle from "../page-title";
 
 export default function Details({
@@ -22,7 +22,7 @@ export default function Details({
       <h4 className="text-gray-500">{show.showType}</h4>
       <div className="flex flex-wrap justify-center gap-6">
         {show.bandShows.map(({ band }) => (
-          <Card key={band.id} band={band} />
+          <BandCard key={band.id} band={band} />
         ))}
       </div>
     </div>
