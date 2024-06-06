@@ -1,10 +1,10 @@
 import Link from "next/link";
+import PageTitle from "~/components/page-title";
 import { showTypes } from "~/utils/showType";
-import PageTitle from "../components/page-title";
 
 export default async function Home() {
   return (
-    <div className="flex min-h-screen flex-col items-center gap-8">
+    <div className="flex min-h-screen flex-col items-center justify-center gap-8">
       <PageTitle title="Band on the Run" />
       <div className="container flex flex-col items-center justify-center gap-12 px-4 ">
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">

@@ -1,6 +1,5 @@
 "use client";
 
-import React from "react";
 import { BallTriangle } from "react-loader-spinner";
 
 export default function Spinner() {

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getServerAuthSession } from "~/server/auth";
-import PageTitle from "../../components/page-title";
+import PageTitle from "../../../components/page-title";
 
 export const metadata = {
   title: "bandOnTheRun | Admin",
@@ -12,7 +12,7 @@ export default async function Page() {
   const session = await getServerAuthSession();
 
   return (
-    <div className="flex flex-col items-center gap-8">
+    <div className="flex flex-col items-center gap-4">
       {session ? (
         <>
           <PageTitle title="Admin" />
@@ -22,25 +22,25 @@ export default async function Page() {
                 className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
                 href="/admin/bands/add"
               >
-                <h3>Add new band →</h3>
+                <h5>Add new band →</h5>
               </Link>
               <Link
                 className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
                 href="/admin/shows/add"
               >
-                <h3>Add new show →</h3>
+                <h5>Add new show →</h5>
               </Link>
               <Link
                 className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
                 href="/admin/bands/update"
               >
-                <h3>Edit bands details →</h3>
+                <h5>Edit bands details →</h5>
               </Link>
               <Link
                 className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
                 href="/admin/shows/update"
               >
-                <h3>Edit show details →</h3>
+                <h5>Edit show details →</h5>
               </Link>
             </div>
           </div>
