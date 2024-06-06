@@ -1,7 +1,7 @@
 import "~/styles/globals.css";
 
 import { TRPCReactProvider } from "~/trpc/react";
-import NavBar from "./_components/NavBar";
+import SiteHeader from "./_components/header/site-header";
 
 export const metadata = {
   title: "bandOnTheRun",
@@ -16,13 +16,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>
+      <body className="min-h-screen bg-background">
         <TRPCReactProvider>
-          <main className="flex min-h-screen w-full flex-col">
-            <NavBar />
-
-            <div className="overflow-auto p-10">{children}</div>
-          </main>
+          <div className="relative flex min-h-screen flex-col bg-background">
+            <SiteHeader />
+            <main className="flex-1">
+              <div className="overflow-auto p-10">{children}</div>
+            </main>
+          </div>
         </TRPCReactProvider>
       </body>
     </html>
