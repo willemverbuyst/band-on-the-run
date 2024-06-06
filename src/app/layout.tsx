@@ -1,7 +1,13 @@
+import { Poppins } from "next/font/google";
+import { cn } from "~/lib/utils";
 import "~/styles/globals.css";
-
 import { TRPCReactProvider } from "~/trpc/react";
 import SiteHeader from "./_components/header/site-header";
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
 
 export const metadata = {
   title: "bandOnTheRun",
@@ -16,7 +22,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="min-h-screen bg-background">
+      <body className={cn(poppins.className, "dark")}>
         <TRPCReactProvider>
           <div className="relative flex min-h-screen flex-col bg-background">
             <SiteHeader />
