@@ -1,5 +1,13 @@
 import Link from "next/link";
 import { Badge } from "~/components/ui/badge";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "~/components/ui/table";
 import type { api } from "~/trpc/server";
 import PageTitle from "../PageTitle";
 
@@ -34,37 +42,35 @@ export default function Details({
         ))}
       </div>
       {sortedShows.length > 0 ? (
-        <table className="table-auto bg-white/10 text-left text-xs text-white ">
-          <thead className="uppercase">
-            <tr>
-              <th className="px-4 py-2">Date</th>
-              <th className="px-4 py-2">Name</th>
-              <th className="px-4 py-2">City</th>
-              <th className="px-4 py-2">Country</th>
-              <th className="px-4 py-2">Type</th>
-            </tr>
-          </thead>
-          <tbody>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Date</TableHead>
+              <TableHead>Name</TableHead>
+              <TableHead>City</TableHead>
+              <TableHead>Country</TableHead>
+              <TableHead>Type</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
             {sortedShows.map(({ show }) => (
-              <tr key={show.id}>
-                <td className="px-4 py-2">{show.date.toLocaleDateString()}</td>
-                <td className="px-4 py-2">
+              <TableRow key={show.id}>
+                <TableCell>{show.date.toLocaleDateString()}</TableCell>
+                <TableCell>
                   <Link
                     className="cursor-pointer hover:underline"
                     href={`/shows/${show.id}`}
                   >
                     {show.name}
                   </Link>
-                </td>
-                <td className="px-4 py-2">{show.location.city}</td>
-                <td className="px-4 py-2">{show.location.country}</td>
-                <td className="px-4 py-2 text-xs text-gray-500">
-                  {show.showType}
-                </td>
-              </tr>
+                </TableCell>
+                <TableCell>{show.location.city}</TableCell>
+                <TableCell>{show.location.country}</TableCell>
+                <TableCell>{show.showType}</TableCell>
+              </TableRow>
             ))}
-          </tbody>
-        </table>
+          </TableBody>
+        </Table>
       ) : (
         <div className="text-center">No shows scheduled</div>
       )}

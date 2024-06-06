@@ -3,6 +3,14 @@
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import React from "react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "~/components/ui/table";
 import type { api } from "~/trpc/server";
 import { formatDate } from "~/utils/date";
 import { showTypes } from "~/utils/showType";
@@ -69,32 +77,30 @@ export default function Overview({
     .filter(filterOnSearch);
 
   return shows.length > 0 ? (
-    <table className="table-fixed bg-white/10 text-left text-xs text-white ">
-      <thead className="uppercase">
-        <tr>
-          <th className="w-1/7 border-b-2 border-gray-500 px-4 py-2">Date</th>
-          <th className="w-1/7 border-b-2 border-gray-500 px-4 py-2">Name</th>
-          <th className="w-2/7 border-b-2 border-gray-500 px-4 py-2">Bands</th>
-          <th className="w-1/7 border-b-2 border-gray-500 px-4 py-2">City</th>
-          <th className="w-1/7 border-b-2 border-gray-500 px-4 py-2">
-            Country
-          </th>
-          <th className="w-1/7 border-b-2 border-gray-500 px-4 py-2">Type</th>
-        </tr>
-      </thead>
-      <tbody>
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableHead>Date</TableHead>
+          <TableHead>Name</TableHead>
+          <TableHead>Bands</TableHead>
+          <TableHead>City</TableHead>
+          <TableHead>Country</TableHead>
+          <TableHead>Type</TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
         {filteredShows.map((show) => (
-          <tr key={show.id}>
-            <td className="px-4 py-2">{formatDate(show.date)}</td>
-            <td className="px-4 py-2">
+          <TableRow key={show.id}>
+            <TableCell>{formatDate(show.date)}</TableCell>
+            <TableCell>
               <Link
                 className="cursor-pointer hover:underline"
                 href={`/shows/${show.id}`}
               >
                 {show.name}
               </Link>
-            </td>
-            <td className="px-4 py-2">
+            </TableCell>
+            <TableCell>
               {show.bandShows.map((bs, i) => (
                 <React.Fragment key={i}>
                   <Link
@@ -106,14 +112,14 @@ export default function Overview({
                   {i < show.bandShows.length - 1 && ", "}
                 </React.Fragment>
               ))}
-            </td>
-            <td className="px-4 py-2">{show.location.city}</td>
-            <td className="px-4 py-2">{show.location.country}</td>
-            <td className="px-4 py-2 text-xs text-gray-500">{show.showType}</td>
-          </tr>
+            </TableCell>
+            <TableCell>{show.location.city}</TableCell>
+            <TableCell>{show.location.country}</TableCell>
+            <TableCell>{show.showType}</TableCell>
+          </TableRow>
         ))}
-      </tbody>
-    </table>
+      </TableBody>
+    </Table>
   ) : (
     <div className="text-center">No shows scheduled</div>
   );
