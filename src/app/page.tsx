@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { showTypes } from "~/utils/showType";
-import PageTitle from "./_components/PageTitle";
+import PageTitle from "../components/page-title";
 
 export default async function Home() {
   return (
@@ -15,7 +15,7 @@ export default async function Home() {
               query: { showType: showTypes.join(",") },
             }}
           >
-            <h3 className="text-2xl font-bold">Fans →</h3>
+            <h3>Fans →</h3>
             <div className="text-lg">
               Looking for a show of your favorite band? Discover who is on the
               road.
@@ -25,7 +25,7 @@ export default async function Home() {
             className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
             href="/admin"
           >
-            <h3 className="text-2xl font-bold">Bands →</h3>
+            <h3>Bands →</h3>
             <div className="text-lg">
               Update your band&apos;s tour dates and let your fans know where
               you are.
@@ -33,7 +33,7 @@ export default async function Home() {
           </Link>
         </div>
         <div className="flex max-w-prose flex-col gap-2">
-          <h2 className="text-center text-3xl">
+          <h2 className="text-center">
             Welcome to <span className="text-cyan-500">bandOnTheRun</span>
           </h2>
           <h3 className="text-center text-gray-500">

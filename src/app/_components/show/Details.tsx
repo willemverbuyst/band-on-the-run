@@ -1,6 +1,6 @@
 import type { api } from "~/trpc/server";
 import { formatDate } from "~/utils/date";
-import PageTitle from "../PageTitle";
+import PageTitle from "../../../components/page-title";
 import Card from "../band/Card";
 
 export default function Details({
@@ -15,8 +15,8 @@ export default function Details({
   return (
     <div className="flex flex-col items-center justify-center gap-4">
       <PageTitle title={show.name} />
-      <h3 className="text-center text-2xl">{formatDate(show.date)}</h3>
-      <h3 className="text-center text-2xl">
+      <h3 className="text-center">{formatDate(show.date)}</h3>
+      <h3 className="text-center">
         {show.location.city} - {show.location.country}
       </h3>
       <h4 className="text-gray-500">{show.showType}</h4>

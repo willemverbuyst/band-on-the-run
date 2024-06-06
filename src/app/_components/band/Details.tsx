@@ -9,7 +9,7 @@ import {
   TableRow,
 } from "~/components/ui/table";
 import type { api } from "~/trpc/server";
-import PageTitle from "../PageTitle";
+import PageTitle from "../../../components/page-title";
 
 export default function Details({
   band,

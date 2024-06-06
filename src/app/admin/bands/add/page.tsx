@@ -1,5 +1,5 @@
 import { CreateBand } from "~/app/_components/band/CreateBand";
-import PageTitle from "~/app/_components/PageTitle";
+import PageTitle from "~/components/page-title";
 import { getServerAuthSession } from "~/server/auth";
 
 export default async function Page() {

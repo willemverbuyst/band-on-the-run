@@ -1,5 +1,5 @@
 import { api } from "~/trpc/server";
-import PageTitle from "../_components/PageTitle";
+import PageTitle from "../../components/page-title";
 import Search from "../_components/Search";
 import ShowTypeCheckbox from "../_components/ShowTypeCheckbox";
 import GenreFilter from "../_components/genre-filter";
