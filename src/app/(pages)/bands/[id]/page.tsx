@@ -1,4 +1,4 @@
-import Details from "~/app/_components/band/Details";
+import Details from "~/components/band/details";
 import { api } from "~/trpc/server";
 
 export default async function Page({ params }: { params: { id: string } }) {

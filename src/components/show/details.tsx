@@ -1,7 +1,7 @@
 import type { api } from "~/trpc/server";
 import { formatDate } from "~/utils/date";
-import PageTitle from "../../../components/page-title";
-import Card from "../band/Card";
+import Card from "../band-card";
+import PageTitle from "../page-title";
 
 export default function Details({
   show,

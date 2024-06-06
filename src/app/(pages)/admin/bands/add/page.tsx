@@ -1,4 +1,4 @@
-import { CreateBand } from "~/app/_components/band/CreateBand";
+import { CreateBand } from "~/components/band/create-band";
 import PageTitle from "~/components/page-title";
 import { getServerAuthSession } from "~/server/auth";
 

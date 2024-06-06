@@ -1,7 +1,7 @@
-import { Search } from "lucide-react";
-import Overview from "~/app/_components/band/Overview";
-import GenreFilter from "~/app/_components/genre-filter";
+import Overview from "~/components/band/overview";
+import GenreFilter from "~/components/genre-filter";
 import PageTitle from "~/components/page-title";
+import Search from "~/components/search";
 import { api } from "~/trpc/server";
 
 export const metadata = {

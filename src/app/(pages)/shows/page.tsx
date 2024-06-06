@@ -1,8 +1,8 @@
-import { Search } from "lucide-react";
-import ShowTypeCheckbox from "~/app/_components/ShowTypeCheckbox";
-import GenreFilter from "~/app/_components/genre-filter";
-import Overview from "~/app/_components/show/Overview";
+import GenreFilter from "~/components/genre-filter";
 import PageTitle from "~/components/page-title";
+import Search from "~/components/search";
+import ShowTypeCheckbox from "~/components/show-type-checkbox";
+import Overview from "~/components/show/overview";
 import { api } from "~/trpc/server";
 
 export const metadata = {

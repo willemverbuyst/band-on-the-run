@@ -1,9 +1,8 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
-
 import type { api } from "~/trpc/server";
-import Card from "./Card";
+import Card from "../band-card";
 
 export default function Overview({
   bands,
