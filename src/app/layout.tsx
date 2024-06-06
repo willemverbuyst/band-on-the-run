@@ -1,7 +1,5 @@
 import "~/styles/globals.css";
 
-import { GeistSans } from "geist/font/sans";
-
 import { TRPCReactProvider } from "~/trpc/react";
 import NavBar from "./_components/NavBar";
 
@@ -17,10 +15,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${GeistSans.variable}`}>
+    <html lang="en">
       <body>
         <TRPCReactProvider>
-          <main className="flex min-h-screen w-full flex-col bg-zinc-950 text-white">
+          <main className="flex min-h-screen w-full flex-col">
             <NavBar />
 
             <div className="overflow-auto p-10">{children}</div>

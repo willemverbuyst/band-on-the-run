@@ -6,7 +6,7 @@ export default async function NavBar() {
   const session = await getServerAuthSession();
 
   return (
-    <section className="grid grid-cols-3 bg-gray-800 p-2">
+    <section className="grid grid-cols-3 p-2">
       <nav className="mr-auto flex items-center px-3">
         <Link href="/" className="px-5">
           <h1 className="text-xl text-cyan-500">bandOnTheRun</h1>
