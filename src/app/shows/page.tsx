@@ -1,8 +1,8 @@
 import { api } from "~/trpc/server";
-import GenreFilter from "../_components/GenreFilter";
 import PageTitle from "../_components/PageTitle";
 import Search from "../_components/Search";
 import ShowTypeCheckbox from "../_components/ShowTypeCheckbox";
+import GenreFilter from "../_components/genre-filter";
 import Overview from "../_components/show/Overview";
 
 export const metadata = {

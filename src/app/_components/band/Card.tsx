@@ -1,6 +1,6 @@
 import Link from "next/link";
+import { Badge } from "~/components/ui/badge";
 import type { api } from "~/trpc/server";
-import GenreBadge from "../GenreBadge";
 
 export default function Card({
   band,
@@ -16,7 +16,9 @@ export default function Card({
       <section className="flex flex-wrap gap-2">
         {band.genre.map((g) => (
           <Link key={g} href={`/bands?genre=${g.replaceAll(" ", "+")}`}>
-            <GenreBadge key={g} genre={g} customStyle="bg-zinc-950" />
+            <Badge variant="secondary">
+              {g.replace("_", " ").toLocaleLowerCase()}
+            </Badge>
           </Link>
         ))}
       </section>

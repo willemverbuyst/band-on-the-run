@@ -1,8 +1,8 @@
 import { api } from "~/trpc/server";
-import GenreFilter from "../_components/GenreFilter";
 import PageTitle from "../_components/PageTitle";
 import Search from "../_components/Search";
 import Overview from "../_components/band/Overview";
+import GenreFilter from "../_components/genre-filter";
 
 export const metadata = {
   title: "bandOnTheRun | Bands",

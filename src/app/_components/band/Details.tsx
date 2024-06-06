@@ -1,6 +1,6 @@
 import Link from "next/link";
+import { Badge } from "~/components/ui/badge";
 import type { api } from "~/trpc/server";
-import GenreBadge from "../GenreBadge";
 import PageTitle from "../PageTitle";
 
 export default function Details({
@@ -27,7 +27,9 @@ export default function Details({
       <div className="flex justify-around gap-2">
         {band.genre.map((g) => (
           <Link key={g} href={`/bands?genre=${g.replaceAll(" ", "+")}`}>
-            <GenreBadge genre={g} customStyle="bg-cyan-500" />
+            <Badge variant="secondary">
+              {g.replace("_", " ").toLocaleLowerCase()}
+            </Badge>
           </Link>
         ))}
       </div>
