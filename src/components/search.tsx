@@ -3,6 +3,7 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import type { ChangeEvent } from "react";
 import { useDebouncedCallback } from "use-debounce";
+import { Input } from "./ui/input";
 
 export default function Search() {
   const searchParams = useSearchParams();
@@ -26,14 +27,12 @@ export default function Search() {
   );
 
   return (
-    <div>
-      <input
-        type="text"
-        placeholder="Search..."
-        className="w-full rounded-full px-4 py-2 text-black"
-        defaultValue={searchParams.get("search")?.toString() ?? ""}
-        onChange={(e) => handleSearch(e)}
-      />
-    </div>
+    <Input
+      type="text"
+      placeholder="Search..."
+      className="w-[400px]"
+      defaultValue={searchParams.get("search")?.toString() ?? ""}
+      onChange={(e) => handleSearch(e)}
+    />
   );
 }
