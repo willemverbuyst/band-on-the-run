@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { buttonVariants } from "~/components/ui/button";
+import { Button } from "~/components/ui/button";
 import MainNav from "./main-nav";
 
 export default function SiteHeader() {
@@ -8,12 +8,9 @@ export default function SiteHeader() {
       <div className="flex h-14 items-center">
         <MainNav />
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
-          <Link
-            href="/api/auth/signin"
-            className={buttonVariants({ variant: "outline" })}
-          >
-            Sign in
-          </Link>
+          <Button asChild variant="outline">
+            <Link href="/api/auth/signin">Sign in</Link>
+          </Button>
         </div>
       </div>
     </header>

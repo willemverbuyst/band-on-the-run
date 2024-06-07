@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import { showTypes } from "~/lib/showType";
 import { cn } from "~/lib/utils";
 import { Icons } from "../icons";
-import { Button } from "../ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -62,9 +61,7 @@ export default function MainNav() {
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button
-              variant="text"
-              size="clean"
+            <p
               className={cn(
                 "transition-colors hover:text-foreground/80",
                 pathname?.startsWith("/admin")
@@ -73,7 +70,7 @@ export default function MainNav() {
               )}
             >
               Admin
-            </Button>
+            </p>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56">
             <DropdownMenuLabel>Admin Actions</DropdownMenuLabel>
