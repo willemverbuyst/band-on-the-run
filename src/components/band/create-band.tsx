@@ -1,6 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Genre } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { useMemo } from "react";
 import type { SubmitHandler } from "react-hook-form";
@@ -8,26 +9,38 @@ import { useForm } from "react-hook-form";
 import { getYearsForSelect } from "~/lib/date";
 import { genres } from "~/lib/genre";
 import { api } from "~/trpc/react";
-import type { BandSchema } from "~/validationSchema/band";
-import { bandSchema } from "~/validationSchema/band";
+import { bandSchema, type BandSchema } from "~/validationSchema/band";
+import { Button } from "../ui/button";
+import { Form, FormControl, FormField, FormItem, FormLabel } from "../ui/form";
+import { Input } from "../ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../ui/select";
+import { Textarea } from "../ui/textarea";
 
 export function CreateBand() {
   const router = useRouter();
 
   const years = useMemo(() => getYearsForSelect(), []);
 
-  const {
-    register,
-    formState: { errors },
-    handleSubmit,
-    reset,
-  } = useForm<BandSchema>({
+  const form = useForm<BandSchema>({
     resolver: zodResolver(bandSchema),
+    defaultValues: {
+      name: "",
+      bio: "",
+      foundedYear: "",
+      origin: "",
+      genre: "",
+    },
   });
 
   const createBand = api.band.create.useMutation({
     onSuccess: () => {
-      reset();
+      form.reset();
       router.push("/bands");
     },
   });
@@ -38,86 +51,106 @@ export function CreateBand() {
       bio: data.bio,
       foundedYear: Number(data.foundedYear),
       country: data.origin,
-      genre: data.genre,
+      genre: [data.genre as Genre],
     });
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="flex w-[400px] flex-col gap-2"
-    >
-      <section className="flex flex-col gap-1 py-2">
-        <label htmlFor="name">name</label>
-        <input
-          {...register("name")}
-          id="name"
-          placeholder="name of the band"
-          className="w-full rounded px-4 py-2 text-black"
+    <Form {...form}>
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+        <FormField
+          control={form.control}
+          name="name"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel htmlFor="name">name</FormLabel>
+              <FormControl>
+                <Input {...field} />
+              </FormControl>
+            </FormItem>
+          )}
         />
-        {errors.name && <p className="text-red-500">{errors.name.message}</p>}
-      </section>
-      <section className="flex flex-col gap-1 py-2">
-        <label htmlFor="yearFounded">year founded</label>
-        <select
-          {...register("foundedYear")}
-          id="yearFounded"
-          className="w-full rounded px-4 py-2 text-black"
-          defaultValue={new Date().getFullYear()}
-        >
-          {years.map((y) => (
-            <option key={y} value={y}>
-              {y}
-            </option>
-          ))}
-        </select>
-      </section>
-      <section className="flex flex-col gap-1 py-2">
-        <label htmlFor="origin">origin</label>
-        <input
-          {...register("origin")}
-          id="origin"
-          placeholder="country where the band is from"
-          className="w-full rounded px-4 py-2 text-black"
+        <FormField
+          control={form.control}
+          name="foundedYear"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel htmlFor="name">year founded</FormLabel>
+              <FormControl>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="select a year" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {years.map((y) => (
+                      <SelectItem key={y} value={String(y)}>
+                        {y}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </FormControl>
+            </FormItem>
+          )}
         />
-        {errors.origin && (
-          <p className="text-red-500">{errors.origin.message}</p>
-        )}
-      </section>
-      <section className="flex flex-col gap-1 py-2">
-        <label htmlFor="genre">genre</label>
-        <select
-          {...register("genre")}
-          id="genre"
-          className="w-full rounded px-4 py-2 text-black"
-          multiple
-        >
-          {genres.map((g) => (
-            <option key={g} value={g}>
-              {g.replace(/_/g, " ").toLocaleLowerCase()}
-            </option>
-          ))}
-        </select>
-        {errors.genre && <p className="text-red-500">{errors.genre.message}</p>}
-      </section>
-      <section className="flex flex-col gap-1 py-2">
-        <label htmlFor="bio">bio</label>
-        <textarea
-          {...register("bio")}
-          id="bio"
-          placeholder="biography of the band"
-          className="w-full rounded px-4 py-2 text-black"
+        <FormField
+          control={form.control}
+          name="origin"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel htmlFor="name">origin</FormLabel>
+              <FormControl>
+                <Input {...field} />
+              </FormControl>
+            </FormItem>
+          )}
         />
-      </section>
-      <section className="flex flex-col gap-1">
-        <button
-          type="submit"
-          className="rounded bg-white/10 px-10 py-3 font-semibold transition hover:bg-white/20"
-          disabled={createBand.isPending}
-        >
+        <FormField
+          control={form.control}
+          name="genre"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel htmlFor="name">genre</FormLabel>
+              <FormControl>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="select genre" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {genres.map((g) => (
+                      <SelectItem key={g} value={g}>
+                        {g.replace(/_/g, " ").toLocaleLowerCase()}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </FormControl>
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="bio"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel htmlFor="bio">bio</FormLabel>
+              <FormControl>
+                <Textarea {...field} />
+              </FormControl>
+            </FormItem>
+          )}
+        />
+
+        <Button type="submit" disabled={createBand.isPending}>
           {createBand.isPending ? "Submitting..." : "Submit"}
-        </button>
-      </section>
-    </form>
+        </Button>
+      </form>
+    </Form>
   );
 }
