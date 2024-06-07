@@ -94,7 +94,7 @@ export function CreateBand() {
         >
           {genres.map((g) => (
             <option key={g} value={g}>
-              {g}
+              {g.replace(/_/g, " ").toLocaleLowerCase()}
             </option>
           ))}
         </select>
