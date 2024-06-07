@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Icons } from "~/components/icons";
 import PageTitle from "~/components/page-title";
 import { showTypes } from "~/lib/showType";
 
@@ -33,10 +34,12 @@ export default async function Home() {
           </Link>
         </div>
         <div className="flex max-w-prose flex-col gap-2">
-          <h2 className="text-center">
-            Welcome to <span className="text-cyan-500">bandOnTheRun</span>
+          <h2 className="flex items-center justify-center gap-2">
+            Welcome to <Icons.music className="h-6 w-6 text-cyan-500" />
+            <span className="text-cyan-500">bandOnTheRun</span>
           </h2>
-          <h3 className="text-center text-gray-500">
+
+          <h3 className="text-center text-xl text-gray-500">
             the ultimate destination for connecting bands with their fans!
           </h3>
 
