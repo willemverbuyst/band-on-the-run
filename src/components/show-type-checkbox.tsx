@@ -3,6 +3,7 @@
 import type { ShowType } from "@prisma/client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { showTypes } from "~/lib/showType";
+import { Checkbox } from "./ui/checkbox";
 
 export default function ShowTypeCheckbox() {
   const searchParams = useSearchParams();
@@ -30,18 +31,17 @@ export default function ShowTypeCheckbox() {
   return (
     <section className="flex gap-4">
       {showTypes.map((st) => (
-        <section key={st} className="flex gap-1">
-          <input
+        <div className="flex items-center space-x-2" key={st}>
+          <Checkbox
             id={st}
-            type="checkbox"
             checked={
               !!searchParams.get("showType") &&
               searchParams.get("showType")?.toString().split(",").includes(st)
             }
-            onChange={() => handleCheck(st)}
+            onCheckedChange={() => handleCheck(st)}
           />
           <label htmlFor={st}>{st}</label>
-        </section>
+        </div>
       ))}
     </section>
   );
