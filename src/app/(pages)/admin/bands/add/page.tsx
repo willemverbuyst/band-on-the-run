@@ -1,4 +1,5 @@
 import { CreateBand } from "~/components/band/create-band";
+import { Icons } from "~/components/icons";
 import PageTitle from "~/components/page-title";
 import { getServerAuthSession } from "~/server/auth";
 
@@ -9,7 +10,7 @@ export default async function Page() {
     <div className="flex flex-col items-center justify-center gap-4">
       {session ? (
         <>
-          <PageTitle title="Add new band" />
+          <Icons.music size={40} />
           <CreateBand />
         </>
       ) : (

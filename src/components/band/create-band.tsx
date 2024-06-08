@@ -2,6 +2,7 @@
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { type Genre } from "@prisma/client";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useMemo } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
@@ -10,6 +11,14 @@ import { genres } from "~/lib/genre";
 import { api } from "~/trpc/react";
 import { bandSchema, type BandSchema } from "~/validationSchema/band";
 import { Button } from "../ui/button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "../ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "../ui/form";
 import { Input } from "../ui/input";
 import {
@@ -55,101 +64,115 @@ export function CreateBand() {
   };
 
   return (
-    <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-        <FormField
-          control={form.control}
-          name="name"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel htmlFor="name">name</FormLabel>
-              <FormControl>
-                <Input {...field} />
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="foundedYear"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel htmlFor="name">year founded</FormLabel>
-              <FormControl>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="select a year" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {years.map((y) => (
-                      <SelectItem key={y} value={String(y)}>
-                        {y}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="origin"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel htmlFor="name">origin</FormLabel>
-              <FormControl>
-                <Input {...field} />
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="genre"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel htmlFor="name">genre</FormLabel>
-              <FormControl>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="select genre" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {genres.map((g) => (
-                      <SelectItem key={g} value={g}>
-                        {g.replace(/_/g, " ").toLocaleLowerCase()}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </FormControl>
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="bio"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel htmlFor="bio">bio</FormLabel>
-              <FormControl>
-                <Textarea {...field} />
-              </FormControl>
-            </FormItem>
-          )}
-        />
+    <Card className="w-full max-w-sm">
+      <CardHeader>
+        <CardTitle>Band</CardTitle>
+        <CardDescription>Create a new band</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <Form {...form}>
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-2">
+            <FormField
+              control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel htmlFor="name">name</FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="foundedYear"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel htmlFor="name">year founded</FormLabel>
+                  <FormControl>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="select a year" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {years.map((y) => (
+                          <SelectItem key={y} value={String(y)}>
+                            {y}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="origin"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel htmlFor="name">origin</FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="genre"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel htmlFor="name">genre</FormLabel>
+                  <FormControl>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <SelectTrigger>
+                        <SelectValue placeholder="select genre" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {genres.map((g) => (
+                          <SelectItem key={g} value={g}>
+                            {g.replace(/_/g, " ").toLocaleLowerCase()}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </FormControl>
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="bio"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel htmlFor="bio">bio</FormLabel>
+                  <FormControl>
+                    <Textarea {...field} />
+                  </FormControl>
+                </FormItem>
+              )}
+            />
 
-        <Button type="submit" disabled={createBand.isPending}>
-          {createBand.isPending ? "Submitting..." : "Submit"}
+            <Button type="submit" disabled={createBand.isPending}>
+              {createBand.isPending ? "Submitting..." : "Submit"}
+            </Button>
+          </form>
+        </Form>
+      </CardContent>
+      <CardFooter className="justify-between">
+        <small className="text-gray-500">Band name must be unique</small>
+        <Button asChild variant="outline" size="sm">
+          <Link href="/bands">Bands</Link>
         </Button>
-      </form>
-    </Form>
+      </CardFooter>
+    </Card>
   );
 }
