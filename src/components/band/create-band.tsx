@@ -42,9 +42,12 @@ export const formSchema = z.object({
   name: z.string().min(1, { message: "name is required" }),
   email: z.string().email().min(1, { message: "email is required" }),
   bio: z.string().optional(),
-  foundedYear: z.string().regex(/19[0-9]{2}|20[0-2][0-9]/, {
-    message: `year must be between 1950 and ${new Date().getFullYear()}`,
-  }),
+  foundedYear: z.coerce
+    .number()
+    .min(1950, { message: "year cannot be earlier than 1950" })
+    .max(new Date().getFullYear(), {
+      message: "year cannot be in the future",
+    }),
   origin: z.string().min(1, { message: "origin of band is required" }),
   // genre: z
   //   .array(z.enum([...genres]))
@@ -63,7 +66,7 @@ export function CreateBand() {
       name: "",
       email: "",
       bio: "",
-      foundedYear: "",
+      foundedYear: new Date().getFullYear(),
       origin: "",
       genre: "",
     },
@@ -79,7 +82,7 @@ export function CreateBand() {
       name: data.name,
       email: data.email,
       bio: data.bio,
-      foundedYear: Number(data.foundedYear),
+      foundedYear: data.foundedYear,
       country: data.origin,
       genre: [data.genre as Genre],
     });
@@ -157,7 +160,7 @@ export function CreateBand() {
                   <FormControl>
                     <Select
                       onValueChange={field.onChange}
-                      defaultValue={field.value}
+                      defaultValue={String(field.value)}
                     >
                       <SelectTrigger>
                         <SelectValue placeholder="select a year" />
