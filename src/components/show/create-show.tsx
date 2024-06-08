@@ -34,15 +34,32 @@ import {
   SelectValue,
 } from "../ui/select";
 
-export const formSchema = z.object({
-  name: z.string().min(1, { message: "name is required" }),
-  date: z.string().min(1, { message: "date is required" }),
-  showType: z.enum([...showTypes]),
-  location: z.object({
-    city: z.string().min(1, { message: "city is required" }),
-    country: z.string().min(1, { message: "country is required" }),
-  }),
-});
+export const formSchema = z
+  .object({
+    name: z.string().min(1, { message: "name is required" }),
+    date: z.string().min(1, { message: "date is required" }),
+    showType: z.enum([...showTypes]),
+    location: z.object({
+      city: z.string().min(1, { message: "city is required" }),
+      country: z.string().min(1, { message: "country is required" }),
+    }),
+    mainAct: z.string().min(1, { message: "main act is required" }),
+    extraBands: z.string().optional(),
+  })
+  .superRefine((data, ctx) => {
+    if (
+      (data.showType === ShowType.FESTIVAL ||
+        data.showType === ShowType.CLUB) &&
+      !data.extraBands
+    ) {
+      ctx.addIssue({
+        code: z.ZodIssueCode.custom,
+        path: ["extraBands"],
+        message: "extra bands are required",
+      });
+    }
+    return data;
+  });
 
 export type FormSchema = z.infer<typeof formSchema>;
 
@@ -53,6 +70,7 @@ export function CreateShow() {
     defaultValues: {
       name: "",
       date: "",
+      mainAct: "",
       showType: ShowType.CLUB,
       location: {
         city: "",
@@ -67,16 +85,19 @@ export function CreateShow() {
     },
   });
   const onSubmit: SubmitHandler<FormSchema> = (data) => {
-    createShow.mutate({
-      name: data.name,
-      date: data.date,
-      showType: data.showType,
-      location: {
-        city: data.location.city,
-        country: data.location.country,
-      },
-    });
+    console.log({ data });
+    // createShow.mutate({
+    //   name: data.name,
+    //   date: data.date,
+    //   showType: data.showType,
+    //   location: {
+    //     city: data.location.city,
+    //     country: data.location.country,
+    //   },
+    // });
   };
+
+  const showType = form.watch("showType");
 
   return (
     <Card className="w-full max-w-sm">
@@ -95,7 +116,7 @@ export function CreateShow() {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel htmlFor="name">name</FormLabel>
+                  <FormLabel htmlFor="name">Name</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="name of the show"
@@ -109,10 +130,27 @@ export function CreateShow() {
             />
             <FormField
               control={form.control}
+              name="mainAct"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel htmlFor="mainAct">Main Act</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="name of the main act"
+                      type="text"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
               name="date"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel htmlFor="date">date</FormLabel>
+                  <FormLabel htmlFor="date">Date</FormLabel>
                   <FormControl>
                     <Input placeholder="date" type="text" {...field} />
                   </FormControl>
@@ -125,7 +163,7 @@ export function CreateShow() {
               name="location.city"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel htmlFor="location.city">city</FormLabel>
+                  <FormLabel htmlFor="location.city">City</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="city where the festival is"
@@ -142,7 +180,7 @@ export function CreateShow() {
               name="location.country"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel htmlFor="location.country">country</FormLabel>
+                  <FormLabel htmlFor="location.country">Country</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="country where the festival is"
@@ -159,14 +197,14 @@ export function CreateShow() {
               name="showType"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel htmlFor="showType">year founded</FormLabel>
+                  <FormLabel htmlFor="showType">Show type</FormLabel>
                   <FormControl>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
                     >
                       <SelectTrigger>
-                        <SelectValue placeholder="select a year" />
+                        <SelectValue placeholder="select a show type" />
                       </SelectTrigger>
                       <SelectContent>
                         {showTypes.map((st) => (
@@ -181,6 +219,26 @@ export function CreateShow() {
                 </FormItem>
               )}
             />
+
+            {(showType === ShowType.FESTIVAL || showType === ShowType.CLUB) && (
+              <FormField
+                control={form.control}
+                name="extraBands"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel htmlFor="extraBands">Other acts</FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="other bands playing at this show"
+                        type="text"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            )}
 
             <Button type="submit" disabled={createShow.isPending}>
               {createShow.isPending ? "Submitting..." : "Submit"}
