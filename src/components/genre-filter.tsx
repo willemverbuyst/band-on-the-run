@@ -1,6 +1,6 @@
 "use client";
 
-import type { Genre } from "@prisma/client";
+import { type Genre } from "@prisma/client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Badge } from "~/components/ui/badge";
 import { genres } from "~/lib/genre";

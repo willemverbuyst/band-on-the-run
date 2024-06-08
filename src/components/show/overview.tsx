@@ -13,7 +13,7 @@ import {
 } from "~/components/ui/table";
 import { formatDate } from "~/lib/date";
 import { showTypes } from "~/lib/showType";
-import type { api } from "~/trpc/server";
+import { type api } from "~/trpc/server";
 
 export default function Overview({
   shows,

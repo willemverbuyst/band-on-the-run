@@ -1,5 +1,5 @@
 import { formatDate } from "~/lib/date";
-import type { api } from "~/trpc/server";
+import { type api } from "~/trpc/server";
 import BandCard from "../band-card";
 import PageTitle from "../page-title";
 

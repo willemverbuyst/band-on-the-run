@@ -1,11 +1,10 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Genre } from "@prisma/client";
+import { type Genre } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import { useMemo } from "react";
-import type { SubmitHandler } from "react-hook-form";
-import { useForm } from "react-hook-form";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import { getYearsForSelect } from "~/lib/date";
 import { genres } from "~/lib/genre";
 import { api } from "~/trpc/react";

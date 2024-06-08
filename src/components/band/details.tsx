@@ -8,7 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from "~/components/ui/table";
-import type { api } from "~/trpc/server";
+import { type api } from "~/trpc/server";
 import PageTitle from "../page-title";
 
 export default function Details({

@@ -7,7 +7,7 @@ import {
   CardHeader,
   CardTitle,
 } from "~/components/ui/card";
-import type { api } from "~/trpc/server";
+import { type api } from "~/trpc/server";
 
 export default function BandCard({
   band,
