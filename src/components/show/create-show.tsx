@@ -1,14 +1,12 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { type Genre } from "@prisma/client";
+import { ShowType } from "@prisma/client";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useMemo } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { z } from "zod";
-import { getYearsForSelect } from "~/lib/date";
-import { genres } from "~/lib/genre";
+import { showTypes } from "~/lib/showType";
 import { api } from "~/trpc/react";
 import { Button } from "../ui/button";
 import {
@@ -22,7 +20,6 @@ import {
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -36,39 +33,34 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import { Textarea } from "../ui/textarea";
 
 export const formSchema = z.object({
   name: z.string().min(1, { message: "name is required" }),
-  email: z.string().email().min(1, { message: "email is required" }),
-  bio: z.string().optional(),
-  foundedYear: z.string().regex(/19[0-9]{2}|20[0-2][0-9]/, {
-    message: `year must be between 1950 and ${new Date().getFullYear()}`,
+  date: z.string().min(1, { message: "date is required" }),
+  showType: z.enum([...showTypes]),
+  location: z.object({
+    city: z.string().min(1, { message: "city is required" }),
+    country: z.string().min(1, { message: "country is required" }),
   }),
-  origin: z.string().min(1, { message: "origin of band is required" }),
-  // genre: z
-  //   .array(z.enum([...genres]))
-  //   .min(1, { message: "pick at least one genre" }),
-  genre: z.string(),
 });
 
 export type FormSchema = z.infer<typeof formSchema>;
 
 export function CreateShow() {
   const router = useRouter();
-  const years = useMemo(() => getYearsForSelect(), []);
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
-      email: "",
-      bio: "",
-      foundedYear: "",
-      origin: "",
-      genre: "",
+      date: "",
+      showType: ShowType.CLUB,
+      location: {
+        city: "",
+        country: "",
+      },
     },
   });
-  const createShow = api.band.create.useMutation({
+  const createShow = api.show.create.useMutation({
     onSuccess: () => {
       form.reset();
       router.push("/shows");
@@ -77,11 +69,12 @@ export function CreateShow() {
   const onSubmit: SubmitHandler<FormSchema> = (data) => {
     createShow.mutate({
       name: data.name,
-      email: data.email,
-      bio: data.bio,
-      foundedYear: Number(data.foundedYear),
-      country: data.origin,
-      genre: [data.genre as Genre],
+      date: data.date,
+      showType: data.showType,
+      location: {
+        city: data.location.city,
+        country: data.location.country,
+      },
     });
   };
 
@@ -105,7 +98,7 @@ export function CreateShow() {
                   <FormLabel htmlFor="name">name</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="name of the band"
+                      placeholder="name of the show"
                       type="text"
                       {...field}
                     />
@@ -116,30 +109,26 @@ export function CreateShow() {
             />
             <FormField
               control={form.control}
-              name="email"
+              name="date"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel htmlFor="email">email</FormLabel>
+                  <FormLabel htmlFor="date">date</FormLabel>
                   <FormControl>
-                    <Input placeholder="john@doe.com" type="email" {...field} />
+                    <Input placeholder="date" type="text" {...field} />
                   </FormControl>
-                  <FormDescription>
-                    This email will be used to contact the band
-                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
             />
-
             <FormField
               control={form.control}
-              name="origin"
+              name="location.city"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel htmlFor="name">origin</FormLabel>
+                  <FormLabel htmlFor="location.city">city</FormLabel>
                   <FormControl>
                     <Input
-                      placeholder="Country where the band is from"
+                      placeholder="city where the festival is"
                       type="text"
                       {...field}
                     />
@@ -150,10 +139,27 @@ export function CreateShow() {
             />
             <FormField
               control={form.control}
-              name="foundedYear"
+              name="location.country"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel htmlFor="name">year founded</FormLabel>
+                  <FormLabel htmlFor="location.country">country</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="country where the festival is"
+                      type="text"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="showType"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel htmlFor="showType">year founded</FormLabel>
                   <FormControl>
                     <Select
                       onValueChange={field.onChange}
@@ -163,57 +169,13 @@ export function CreateShow() {
                         <SelectValue placeholder="select a year" />
                       </SelectTrigger>
                       <SelectContent>
-                        {years.map((y) => (
-                          <SelectItem key={y} value={String(y)}>
-                            {y}
+                        {showTypes.map((st) => (
+                          <SelectItem key={st} value={st}>
+                            {st.toLocaleLowerCase()}
                           </SelectItem>
                         ))}
                       </SelectContent>
                     </Select>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="genre"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel htmlFor="name">genre</FormLabel>
-                  <FormControl>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <SelectTrigger>
-                        <SelectValue placeholder="select genre" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {genres.map((g) => (
-                          <SelectItem key={g} value={g}>
-                            {g.replace(/_/g, " ").toLocaleLowerCase()}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="bio"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel htmlFor="bio">bio</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      placeholder="Add a description of the band"
-                      {...field}
-                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
