@@ -37,7 +37,9 @@ import {
 export const formSchema = z
   .object({
     name: z.string().min(1, { message: "name is required" }),
-    date: z.string().min(1, { message: "date is required" }),
+    date: z.date().refine((date) => {
+      return date.getTime() >= Date.now();
+    }, "date cannot be in the past"),
     showType: z.enum([...showTypes]),
     location: z.object({
       city: z.string().min(1, { message: "city is required" }),
