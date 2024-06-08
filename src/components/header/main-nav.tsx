@@ -1,6 +1,7 @@
 "use client";
 
 import {} from "@radix-ui/react-dropdown-menu";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { showTypes } from "~/lib/showType";
@@ -22,6 +23,7 @@ import {
 
 export default function MainNav() {
   const pathname = usePathname();
+  const { data: session } = useSession();
 
   return (
     <div className="mr-4 hidden md:flex">
@@ -56,64 +58,66 @@ export default function MainNav() {
           Bands
         </Link>
 
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <span
-              className={cn(
-                "transition-colors hover:text-foreground/80",
-                pathname?.startsWith("/admin")
-                  ? "text-foreground"
-                  : "text-foreground/60",
-              )}
-            >
-              Admin
-            </span>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-56">
-            <DropdownMenuLabel>Admin Actions</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuSub>
-                <DropdownMenuSubTrigger>Bands</DropdownMenuSubTrigger>
-                <DropdownMenuPortal>
-                  <DropdownMenuSubContent>
-                    <DropdownMenuItem>
-                      <Icons.plus className="mr-2 h-4 w-4" />
-                      <Link href="/admin/bands/add">
-                        <span>Add new band</span>
-                      </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem>
-                      <Icons.edit className="mr-2 h-4 w-4" />
-                      <Link href="/admin/bands/edit">
-                        <span>Edit band</span>
-                      </Link>
-                    </DropdownMenuItem>
-                  </DropdownMenuSubContent>
-                </DropdownMenuPortal>
-              </DropdownMenuSub>
-              <DropdownMenuSub>
-                <DropdownMenuSubTrigger>Shows</DropdownMenuSubTrigger>
-                <DropdownMenuPortal>
-                  <DropdownMenuSubContent>
-                    <DropdownMenuItem>
-                      <Icons.plus className="mr-2 h-4 w-4" />
-                      <Link href="/admin/shows/add">
-                        <span>Add new show</span>
-                      </Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem>
-                      <Icons.edit className="mr-2 h-4 w-4" />
-                      <Link href="/admin/shows/edit">
-                        <span>Edit show</span>
-                      </Link>
-                    </DropdownMenuItem>
-                  </DropdownMenuSubContent>
-                </DropdownMenuPortal>
-              </DropdownMenuSub>
-            </DropdownMenuGroup>
-          </DropdownMenuContent>
-        </DropdownMenu>
+        {session && (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <span
+                className={cn(
+                  "transition-colors hover:text-foreground/80",
+                  pathname?.startsWith("/admin")
+                    ? "text-foreground"
+                    : "text-foreground/60",
+                )}
+              >
+                Admin
+              </span>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent className="w-56">
+              <DropdownMenuLabel>Admin Actions</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuGroup>
+                <DropdownMenuSub>
+                  <DropdownMenuSubTrigger>Bands</DropdownMenuSubTrigger>
+                  <DropdownMenuPortal>
+                    <DropdownMenuSubContent>
+                      <DropdownMenuItem>
+                        <Icons.plus className="mr-2 h-4 w-4" />
+                        <Link href="/admin/bands/add">
+                          <span>Add new band</span>
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem>
+                        <Icons.edit className="mr-2 h-4 w-4" />
+                        <Link href="/admin/bands/edit">
+                          <span>Edit band</span>
+                        </Link>
+                      </DropdownMenuItem>
+                    </DropdownMenuSubContent>
+                  </DropdownMenuPortal>
+                </DropdownMenuSub>
+                <DropdownMenuSub>
+                  <DropdownMenuSubTrigger>Shows</DropdownMenuSubTrigger>
+                  <DropdownMenuPortal>
+                    <DropdownMenuSubContent>
+                      <DropdownMenuItem>
+                        <Icons.plus className="mr-2 h-4 w-4" />
+                        <Link href="/admin/shows/add">
+                          <span>Add new show</span>
+                        </Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem>
+                        <Icons.edit className="mr-2 h-4 w-4" />
+                        <Link href="/admin/shows/edit">
+                          <span>Edit show</span>
+                        </Link>
+                      </DropdownMenuItem>
+                    </DropdownMenuSubContent>
+                  </DropdownMenuPortal>
+                </DropdownMenuSub>
+              </DropdownMenuGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )}
       </nav>
     </div>
   );

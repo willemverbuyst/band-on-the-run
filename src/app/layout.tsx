@@ -1,5 +1,6 @@
 import { Poppins } from "next/font/google";
 import { cn } from "~/lib/utils";
+import NextAuthProvider from "~/providers/auth-provider";
 import "~/styles/globals.css";
 import { TRPCReactProvider } from "~/trpc/react";
 
@@ -23,9 +24,11 @@ export default function RootLayout({
     <html lang="en">
       <body className={cn(poppins.className, "dark")}>
         <TRPCReactProvider>
-          <div className="flex min-h-screen flex-col items-center justify-center">
-            {children}
-          </div>
+          <NextAuthProvider>
+            <div className="flex min-h-screen flex-col items-center justify-center">
+              {children}
+            </div>
+          </NextAuthProvider>
         </TRPCReactProvider>
       </body>
     </html>
