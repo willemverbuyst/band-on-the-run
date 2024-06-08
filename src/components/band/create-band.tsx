@@ -105,7 +105,7 @@ export function CreateBand() {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel htmlFor="name">name</FormLabel>
+                  <FormLabel htmlFor="name">Name</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="name of the band"
@@ -122,7 +122,7 @@ export function CreateBand() {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel htmlFor="email">email</FormLabel>
+                  <FormLabel htmlFor="email">Email</FormLabel>
                   <FormControl>
                     <Input placeholder="john@doe.com" type="email" {...field} />
                   </FormControl>
@@ -139,7 +139,7 @@ export function CreateBand() {
               name="origin"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel htmlFor="name">origin</FormLabel>
+                  <FormLabel htmlFor="name">Origin</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="Country where the band is from"
@@ -156,7 +156,7 @@ export function CreateBand() {
               name="foundedYear"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel htmlFor="name">year founded</FormLabel>
+                  <FormLabel htmlFor="name">Year founded</FormLabel>
                   <FormControl>
                     <Select
                       onValueChange={field.onChange}
@@ -184,7 +184,7 @@ export function CreateBand() {
               name="genre"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel htmlFor="name">genre</FormLabel>
+                  <FormLabel htmlFor="name">Genre</FormLabel>
                   <FormControl>
                     <Select
                       onValueChange={field.onChange}
@@ -211,7 +211,7 @@ export function CreateBand() {
               name="bio"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel htmlFor="bio">bio</FormLabel>
+                  <FormLabel htmlFor="bio">Biography</FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder="Add a description of the band"
