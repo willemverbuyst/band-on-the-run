@@ -8,6 +8,7 @@ export const bandRouter = createTRPCRouter({
     .input(
       z.object({
         name: z.string().min(1),
+        email: z.string().email().min(1),
         bio: z.string().optional(),
         foundedYear: z.number(),
         country: z.string(),
@@ -18,6 +19,7 @@ export const bandRouter = createTRPCRouter({
       return ctx.db.band.create({
         data: {
           name: input.name,
+          email: input.email,
           bio: input.bio,
           foundedYear: input.foundedYear,
           country: input.country,
