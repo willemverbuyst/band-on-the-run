@@ -249,7 +249,14 @@ export function CreateShow() {
       <CardFooter className="justify-between">
         <small className="text-gray-500">Show must be unique</small>
         <Button asChild variant="outline" size="sm">
-          <Link href="/shows">Shows</Link>
+          <Link
+            href={{
+              pathname: "/shows",
+              query: { showType: showTypes.join(",") },
+            }}
+          >
+            Shows
+          </Link>
         </Button>
       </CardFooter>
     </Card>
