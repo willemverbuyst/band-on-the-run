@@ -54,8 +54,8 @@ export default function GenreFilter() {
       {currentGenres.length > 0 && (
         <Badge
           onClick={clearFilter}
-          variant="destructive"
-          className="flex cursor-pointer"
+          variant="outline"
+          className="flex cursor-pointer text-primary"
         >
           x
         </Badge>
