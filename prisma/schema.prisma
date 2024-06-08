@@ -11,6 +11,7 @@ model Band {
     id          String     @id @default(auto()) @map("_id") @db.ObjectId
     name        String     @unique
     bio         String?
+    email       String     @unique
     genre       Genre[]
     foundedYear Int
     country     String

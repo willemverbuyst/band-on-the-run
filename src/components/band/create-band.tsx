@@ -6,10 +6,10 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useMemo } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
+import { z } from "zod";
 import { getYearsForSelect } from "~/lib/date";
 import { genres } from "~/lib/genre";
 import { api } from "~/trpc/react";
-import { bandSchema, type BandSchema } from "~/validationSchema/band";
 import { Button } from "../ui/button";
 import {
   Card,
@@ -30,13 +30,26 @@ import {
 } from "../ui/select";
 import { Textarea } from "../ui/textarea";
 
+export const formSchema = z.object({
+  name: z.string().min(1, { message: "name is required" }),
+  bio: z.string().optional(),
+  foundedYear: z.string().regex(/19[0-9]{2}|20[0-2][0-9]/),
+  origin: z.string().min(1, { message: "origin of band is required" }),
+  // genre: z
+  //   .array(z.enum([...genres]))
+  //   .min(1, { message: "pick at least one genre" }),
+  genre: z.string(),
+});
+
+export type FormSchema = z.infer<typeof formSchema>;
+
 export function CreateBand() {
   const router = useRouter();
 
   const years = useMemo(() => getYearsForSelect(), []);
 
-  const form = useForm<BandSchema>({
-    resolver: zodResolver(bandSchema),
+  const form = useForm<FormSchema>({
+    resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
       bio: "",
@@ -53,7 +66,7 @@ export function CreateBand() {
     },
   });
 
-  const onSubmit: SubmitHandler<BandSchema> = (data) => {
+  const onSubmit: SubmitHandler<FormSchema> = (data) => {
     createBand.mutate({
       name: data.name,
       bio: data.bio,

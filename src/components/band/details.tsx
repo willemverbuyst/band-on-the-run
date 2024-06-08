@@ -35,9 +35,7 @@ export default function Details({
       <div className="flex justify-around gap-2">
         {band.genre.map((g) => (
           <Link key={g} href={`/bands?genre=${g.replaceAll(" ", "+")}`}>
-            <Badge variant="secondary">
-              {g.replace("_", " ").toLocaleLowerCase()}
-            </Badge>
+            <Badge>{g.replace("_", " ").toLocaleLowerCase()}</Badge>
           </Link>
         ))}
       </div>
@@ -74,6 +72,9 @@ export default function Details({
       ) : (
         <div className="text-center">No shows scheduled</div>
       )}
+      <p>
+        Get in touch: <span className="underline">{band.email}</span>
+      </p>
     </div>
   );
 }
