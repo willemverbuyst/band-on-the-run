@@ -15,7 +15,14 @@ export default function LightDarkToggle() {
   return (
     <TooltipProvider>
       <Tooltip>
-        <TooltipTrigger onClick={() => setIsDarkMode((prev) => !prev)}>
+        <TooltipTrigger
+          onClick={() => {
+            setIsDarkMode((prev) => !prev);
+            // this is ok as the document tag is rendered as a server component
+            // alternative is to use a context to pass the dark mode state
+            document.body.classList.toggle("dark");
+          }}
+        >
           {isDarkMode ? <Icons.moon /> : <Icons.sun />}
         </TooltipTrigger>
         <TooltipContent>
