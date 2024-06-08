@@ -35,8 +35,8 @@ export default async function Home() {
         </div>
         <div className="flex max-w-prose flex-col gap-2">
           <h2 className="flex items-center justify-center gap-2">
-            Welcome to <Icons.music className="h-6 w-6 text-cyan-500" />
-            <span className="text-cyan-500">bandOnTheRun</span>
+            Welcome to <Icons.music className="h-6 w-6 text-primary" />{" "}
+            bandOnTheRun
           </h2>
 
           <h3 className="text-center text-xl text-gray-500">
@@ -45,26 +45,27 @@ export default async function Home() {
 
           <section className="flex flex-col gap-5 text-justify">
             <p>
-              <b>For Fans:</b> Are you a music lover eager to catch your
-              favorite band live in concert? Our &quot;Fans&quot; section is
-              just for you. Here, you can discover which bands are currently on
-              tour and find shows near you. Stay up-to-date with the latest tour
-              dates and never miss a chance to see your favorite artists perform
-              live.
+              <b className="text-primary">For Fans:</b> Are you a music lover
+              eager to catch your favorite band live in concert? Our
+              &quot;Fans&quot; section is just for you. Here, you can discover
+              which bands are currently on tour and find shows near you. Stay
+              up-to-date with the latest tour dates and never miss a chance to
+              see your favorite artists perform live.
             </p>
             <p>
-              <b>For Bands:</b> Are you a band looking to keep your fans
-              informed about your latest tour dates? The &quot;Bands&quot;
-              section allows you to easily update your tour schedule. Make sure
-              your fans know exactly where and when you&apos;ll be performing
-              next. Keep the excitement alive and ensure a great turnout at
-              every show by keeping your tour information current.
+              <b className="text-primary">For Bands:</b> Are you a band looking
+              to keep your fans informed about your latest tour dates? The
+              &quot;Bands&quot; section allows you to easily update your tour
+              schedule. Make sure your fans know exactly where and when
+              you&apos;ll be performing next. Keep the excitement alive and
+              ensure a great turnout at every show by keeping your tour
+              information current.
             </p>
             <p>
-              Explore the sections by clicking on the links and start your
-              journey with &quot;Band on the Run&quot; today! Whether
-              you&apos;re a fan looking for a show or a band updating your tour
-              dates, we&apos;ve got you covered.
+              <b className="text-primary">Explore</b> the sections by clicking
+              on the links and start your journey with &quot;Band on the
+              Run&quot; today! Whether you&apos;re a fan looking for a show or a
+              band updating your tour dates, we&apos;ve got you covered.
             </p>
           </section>
         </div>

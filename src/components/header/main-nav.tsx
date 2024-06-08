@@ -25,11 +25,8 @@ export default function MainNav() {
 
   return (
     <div className="mr-4 hidden md:flex">
-      <Link
-        href="/"
-        className="mr-6 flex items-center space-x-2  text-cyan-500"
-      >
-        <Icons.music className="h-5 w-5" />
+      <Link href="/" className="mr-6 flex items-center space-x-2">
+        <Icons.music className="h-5 w-5 text-primary" />
         <span className="hidden font-bold sm:inline-block">bandOnTheRun</span>
       </Link>
       <nav className="flex items-center gap-4 text-sm lg:gap-6">
@@ -61,7 +58,7 @@ export default function MainNav() {
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <p
+            <span
               className={cn(
                 "transition-colors hover:text-foreground/80",
                 pathname?.startsWith("/admin")
@@ -70,7 +67,7 @@ export default function MainNav() {
               )}
             >
               Admin
-            </p>
+            </span>
           </DropdownMenuTrigger>
           <DropdownMenuContent className="w-56">
             <DropdownMenuLabel>Admin Actions</DropdownMenuLabel>

@@ -47,8 +47,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     return (
       <Comp
         className={cn(
-          "uppercase",
           "tracking-wider",
+          "uppercase",
+          "font-bold",
           buttonVariants({ variant, size, className }),
         )}
         ref={ref}
