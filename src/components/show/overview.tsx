@@ -67,8 +67,11 @@ export default function Overview({
     const showName = show.name.toLowerCase();
     const city = show.location.city.toLowerCase();
     const country = show.location.country.toLowerCase();
+    const bands = show.bandShows.map((bs) => bs.band.name.toLowerCase());
 
-    return [showName, city, country].some((i) => i.includes(searchString));
+    return [showName, city, country, ...bands].some((i) =>
+      i.includes(searchString),
+    );
   }
 
   const filteredShows = [...shows]
