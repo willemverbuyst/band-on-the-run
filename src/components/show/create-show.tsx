@@ -8,7 +8,9 @@ import { useForm, type SubmitHandler } from "react-hook-form";
 import { z } from "zod";
 import { showTypes } from "~/lib/showType";
 import { api } from "~/trpc/react";
+import { Icons } from "../icons";
 import { Button } from "../ui/button";
+import { Calendar } from "../ui/calendar";
 import {
   Card,
   CardContent,
@@ -20,12 +22,14 @@ import {
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
 } from "../ui/form";
 import { Input } from "../ui/input";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import {
   Select,
   SelectContent,
@@ -71,7 +75,7 @@ export function CreateShow() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
-      date: "",
+      date: new Date(),
       mainAct: "",
       showType: ShowType.CLUB,
       location: {
@@ -118,7 +122,7 @@ export function CreateShow() {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel htmlFor="name">Name</FormLabel>
+                  <FormLabel>Name</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="name of the show"
@@ -135,7 +139,7 @@ export function CreateShow() {
               name="mainAct"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel htmlFor="mainAct">Main Act</FormLabel>
+                  <FormLabel>Main Act</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="name of the main act"
@@ -151,11 +155,38 @@ export function CreateShow() {
               control={form.control}
               name="date"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel htmlFor="date">Date</FormLabel>
-                  <FormControl>
-                    <Input placeholder="date" type="text" {...field} />
-                  </FormControl>
+                <FormItem className="flex flex-col pt-2">
+                  <FormLabel>Date</FormLabel>
+                  <Popover>
+                    <PopoverTrigger asChild>
+                      <FormControl>
+                        <Button
+                          variant="outline"
+                          className="flex justify-between pr-1 normal-case"
+                        >
+                          <span>Pick a date</span>
+                          <Icons.calendar />
+                        </Button>
+                      </FormControl>
+                    </PopoverTrigger>
+                    <PopoverContent align="start" className="w-auto p-0">
+                      <Calendar
+                        mode="single"
+                        {...field}
+                        defaultMonth={field.value}
+                        selected={field.value}
+                        onSelect={field.onChange}
+                        fixedWeeks
+                        weekStartsOn={1}
+                        fromDate={new Date()}
+                        // max two years in the future
+                        toDate={new Date(new Date().getFullYear() + 2, 11, 31)}
+                      />
+                    </PopoverContent>
+                  </Popover>
+                  <FormDescription>
+                    The date for the new show cannot be in the past
+                  </FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -165,7 +196,7 @@ export function CreateShow() {
               name="location.city"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel htmlFor="location.city">City</FormLabel>
+                  <FormLabel>City</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="city where the festival is"
@@ -182,7 +213,7 @@ export function CreateShow() {
               name="location.country"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel htmlFor="location.country">Country</FormLabel>
+                  <FormLabel>Country</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="country where the festival is"
@@ -199,7 +230,7 @@ export function CreateShow() {
               name="showType"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel htmlFor="showType">Show type</FormLabel>
+                  <FormLabel>Show type</FormLabel>
                   <FormControl>
                     <Select
                       onValueChange={field.onChange}
@@ -228,7 +259,7 @@ export function CreateShow() {
                 name="extraBands"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel htmlFor="extraBands">Other acts</FormLabel>
+                    <FormLabel>Other acts</FormLabel>
                     <FormControl>
                       <Input
                         placeholder="other bands playing at this show"
