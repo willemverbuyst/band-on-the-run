@@ -1,9 +1,9 @@
 import { faker } from "@faker-js/faker";
 import { PrismaClient } from "@prisma/client";
-import { getRandomYear } from "~/utils/date";
-import { getBandName, getShowName } from "~/utils/dummyData";
-import { getRandomGenres } from "~/utils/genre";
-import { getRandomShowType } from "~/utils/showType";
+import { getRandomYear } from "~/lib/date";
+import { getBandName, getShowName } from "~/lib/dummyData";
+import { getRandomGenres } from "~/lib/genre";
+import { getRandomShowType } from "~/lib/showType";
 
 const prisma = new PrismaClient();
 
@@ -24,6 +24,7 @@ async function createBands() {
       .create({
         data: {
           name,
+          email: `name@${faker.internet.domainName()}`,
           bio: faker.lorem.lines({ min: 2, max: 4 }),
           genre: getRandomGenres(),
           foundedYear: getRandomYear(),
