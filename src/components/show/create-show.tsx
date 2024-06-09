@@ -6,6 +6,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { z } from "zod";
+import { formatDate } from "~/lib/date";
 import { showTypes } from "~/lib/showType";
 import { api } from "~/trpc/react";
 import { Icons } from "../icons";
@@ -75,7 +76,7 @@ export function CreateShow() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
-      date: new Date(),
+      date: undefined,
       mainAct: "",
       showType: ShowType.CLUB,
       location: {
@@ -162,9 +163,13 @@ export function CreateShow() {
                       <FormControl>
                         <Button
                           variant="outline"
-                          className="flex justify-between pr-1 normal-case"
+                          className="flex justify-between pr-1 font-normal normal-case"
                         >
-                          <span>Pick a date</span>
+                          {field.value ? (
+                            formatDate(field.value)
+                          ) : (
+                            <span>Pick a date</span>
+                          )}
                           <Icons.calendar />
                         </Button>
                       </FormControl>
@@ -181,6 +186,7 @@ export function CreateShow() {
                         fromDate={new Date()}
                         // max two years in the future
                         toDate={new Date(new Date().getFullYear() + 2, 11, 31)}
+                        captionLayout="dropdown-buttons"
                       />
                     </PopoverContent>
                   </Popover>
