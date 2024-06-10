@@ -25,9 +25,7 @@ export default function RootLayout({
       <body className={cn(poppins.className, "dark")}>
         <TRPCReactProvider>
           <NextAuthProvider>
-            <div className="flex min-h-screen flex-col items-center justify-center">
-              {children}
-            </div>
+            <div>{children}</div>
           </NextAuthProvider>
         </TRPCReactProvider>
       </body>

@@ -13,7 +13,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="relative flex min-h-screen flex-col bg-background">
+    <div className="relative flex min-h-screen flex-col items-center justify-center bg-background">
       <SiteHeader />
       <main>
         <div className="overflow-auto p-12">{children}</div>
