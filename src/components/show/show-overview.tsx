@@ -15,7 +15,7 @@ import { formatDate } from "~/lib/date";
 import { showTypes } from "~/lib/showType";
 import { type api } from "~/trpc/server";
 
-export default function Overview({
+export default function ShowOverview({
   shows,
 }: {
   shows: Awaited<ReturnType<typeof api.show.getAll>>;

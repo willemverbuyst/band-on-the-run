@@ -1,4 +1,4 @@
-import { CreateBand } from "~/components/band/create-band";
+import { BandAdd } from "~/components/band/band-add";
 import { Icons } from "~/components/icons";
 import PageTitle from "~/components/page-title";
 import { getServerAuthSession } from "~/server/auth";
@@ -11,7 +11,7 @@ export default async function Page() {
       {session ? (
         <>
           <Icons.music size={40} />
-          <CreateBand />
+          <BandAdd />
         </>
       ) : (
         <PageTitle title="Not Authorized Dude!" />

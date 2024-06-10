@@ -3,7 +3,7 @@ import { Icons } from "~/components/icons";
 import PageTitle from "~/components/page-title";
 import { showTypes } from "~/lib/showType";
 
-export default async function Home() {
+export default async function LandingPage() {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center gap-8">
       <PageTitle title="Band on the Run" />

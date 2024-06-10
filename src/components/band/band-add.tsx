@@ -65,7 +65,7 @@ export const formSchema = z.object({
 
 export type FormSchema = z.infer<typeof formSchema>;
 
-export function CreateBand() {
+export function BandAdd() {
   const router = useRouter();
   const years = useMemo(() => getYearsForSelect(), []);
   const form = useForm<FormSchema>({

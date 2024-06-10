@@ -1,5 +1,5 @@
 import React from "react";
-import DashboardMainMenu from "~/components/dashboard-main-menu";
+import DashboardMainMenu from "~/components/dashboard/dashboard-main-menu";
 import SiteHeader from "~/components/header/site-header";
 
 export default function DashboardLayout({

@@ -1,6 +1,6 @@
 import { Icons } from "~/components/icons";
 import PageTitle from "~/components/page-title";
-import { CreateShow } from "~/components/show/create-show";
+import { ShowAdd } from "~/components/show/show-add";
 import { getServerAuthSession } from "~/server/auth";
 
 export default async function Page() {
@@ -11,7 +11,7 @@ export default async function Page() {
       {session ? (
         <>
           <Icons.music size={40} />
-          <CreateShow />
+          <ShowAdd />
         </>
       ) : (
         <PageTitle title="Not Authorized Dude!" />

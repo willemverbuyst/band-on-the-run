@@ -11,7 +11,7 @@ import {
 import { type api } from "~/trpc/server";
 import PageTitle from "../page-title";
 
-export default function Details({
+export default function BandDetails({
   band,
 }: {
   band: Awaited<ReturnType<typeof api.band.getOne>>;

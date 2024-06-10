@@ -1,9 +1,9 @@
 import { formatDate } from "~/lib/date";
 import { type api } from "~/trpc/server";
-import BandCard from "../band-card";
+import BandCard from "../band/band-card";
 import PageTitle from "../page-title";
 
-export default function Details({
+export default function ShowDetails({
   show,
 }: {
   show: Awaited<ReturnType<typeof api.show.getOne>>;

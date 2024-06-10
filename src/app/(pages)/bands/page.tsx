@@ -1,4 +1,4 @@
-import Overview from "~/components/band/overview";
+import Overview from "~/components/band/band-overview";
 import GenreFilter from "~/components/genre-filter";
 import PageTitle from "~/components/page-title";
 import Search from "~/components/search";
@@ -10,7 +10,7 @@ export const metadata = {
   icons: [{ rel: "icon", url: "/favicon.ico" }],
 };
 
-export default async function Page() {
+export default async function BandsPage() {
   const bands = await api.band.getAll();
 
   return (

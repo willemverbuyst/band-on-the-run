@@ -2,9 +2,9 @@
 
 import { useSearchParams } from "next/navigation";
 import { type api } from "~/trpc/server";
-import BandCard from "../band-card";
+import BandCard from "./band-card";
 
-export default function Overview({
+export default function BandOverview({
   bands,
 }: {
   bands: Awaited<ReturnType<typeof api.band.getAll>>;

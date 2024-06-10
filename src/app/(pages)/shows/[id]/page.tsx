@@ -1,4 +1,4 @@
-import Details from "~/components/show/details";
+import Details from "~/components/show/show-details";
 import { api } from "~/trpc/server";
 
 export default async function Page({ params }: { params: { id: string } }) {

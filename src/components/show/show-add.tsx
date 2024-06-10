@@ -70,7 +70,7 @@ export const formSchema = z
 
 export type FormSchema = z.infer<typeof formSchema>;
 
-export function CreateShow() {
+export function ShowAdd() {
   const router = useRouter();
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
