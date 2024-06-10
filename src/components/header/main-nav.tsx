@@ -118,6 +118,19 @@ export default function MainNav() {
             </DropdownMenuContent>
           </DropdownMenu>
         )}
+        {session && (
+          <Link
+            href="/dashboard"
+            className={cn(
+              "transition-colors hover:text-foreground/80",
+              pathname?.startsWith("/dashboard")
+                ? "text-foreground"
+                : "text-foreground/60",
+            )}
+          >
+            Dashboard
+          </Link>
+        )}
       </nav>
     </div>
   );
