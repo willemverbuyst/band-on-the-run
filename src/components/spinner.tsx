@@ -9,7 +9,7 @@ export default function Spinner() {
         height={100}
         width={100}
         radius={5}
-        color="#06b6d4"
+        color="hsl(var(--primary))"
         ariaLabel="ball-triangle-loading"
         wrapperStyle={{}}
         wrapperClass=""
