@@ -1,4 +1,5 @@
 import React from "react";
+import DashboardMainMenu from "~/components/dashboard-main-menu";
 import SiteHeader from "~/components/header/site-header";
 
 export default function DashboardLayout({
@@ -10,8 +11,8 @@ export default function DashboardLayout({
     <div className="relative flex min-h-screen flex-col">
       <SiteHeader />
       <main className="grid flex-grow grid-cols-[250px_1fr]">
-        <div className="overflow-auto bg-muted">Side panel</div>
-        <div className="overflow-auto">{children}</div>
+        <DashboardMainMenu />
+        <div className="overflow-auto px-4 py-2">{children}</div>
       </main>
     </div>
   );

@@ -1,4 +1,12 @@
-import { Calendar, Edit, Moon, Music, Plus, Sun } from "lucide-react";
+import {
+  Calendar,
+  Edit,
+  FileBarChart,
+  Moon,
+  Music,
+  Plus,
+  Sun,
+} from "lucide-react";
 
 export const Icons = {
   calendar: Calendar,
@@ -7,4 +15,5 @@ export const Icons = {
   edit: Edit,
   moon: Moon,
   sun: Sun,
+  fileBarChart: FileBarChart,
 };
