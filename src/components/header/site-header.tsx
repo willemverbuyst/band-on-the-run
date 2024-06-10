@@ -14,6 +14,7 @@ export default function SiteHeader() {
       <div className="flex h-14 items-center">
         <MainNav />
         <div className="flex flex-1 items-center justify-between gap-2 space-x-2 md:justify-end">
+          {session?.user?.name && <p>{session.user.name}</p>}
           <LightDarkToggle />
           <Button asChild variant="outline">
             {session ? (
