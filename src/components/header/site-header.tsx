@@ -3,7 +3,9 @@ import { useSession } from "next-auth/react";
 
 import Link from "next/link";
 import { Button } from "~/components/ui/button";
+import { getInitials } from "~/lib/string";
 import LightDarkToggle from "../light-dark-toggle";
+import { Avatar, AvatarFallback } from "../ui/avatar";
 import MainNav from "./main-nav";
 
 export default function SiteHeader() {
@@ -14,7 +16,13 @@ export default function SiteHeader() {
       <div className="flex h-14 items-center">
         <MainNav />
         <div className="flex flex-1 items-center justify-between gap-2 space-x-2 md:justify-end">
-          {session?.user?.name && <p>{session.user.name}</p>}
+          {session?.user.name && (
+            <Avatar>
+              <AvatarFallback className="bg-primary">
+                {getInitials(session.user.name).toLocaleUpperCase()}
+              </AvatarFallback>
+            </Avatar>
+          )}
           <LightDarkToggle />
           <Button asChild variant="outline">
             {session ? (
