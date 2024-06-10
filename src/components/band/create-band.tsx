@@ -19,6 +19,7 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
+import { Checkbox } from "../ui/checkbox";
 import {
   Form,
   FormControl,
@@ -53,6 +54,13 @@ export const formSchema = z.object({
   //   .array(z.enum([...genres]))
   //   .min(1, { message: "pick at least one genre" }),
   genre: z.string(),
+  acceptTerms: z
+    .boolean({
+      required_error: "you must accept the terms and conditions",
+    })
+    .refine((checked) => checked, {
+      message: "you must accept the terms and conditions",
+    }),
 });
 
 export type FormSchema = z.infer<typeof formSchema>;
@@ -69,6 +77,7 @@ export function CreateBand() {
       foundedYear: new Date().getFullYear(),
       origin: "",
       genre: "",
+      acceptTerms: undefined,
     },
   });
   const createBand = api.band.create.useMutation({
@@ -105,7 +114,7 @@ export function CreateBand() {
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel htmlFor="name">Name</FormLabel>
+                  <FormLabel>Name</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="name of the band"
@@ -122,7 +131,7 @@ export function CreateBand() {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel htmlFor="email">Email</FormLabel>
+                  <FormLabel>Email</FormLabel>
                   <FormControl>
                     <Input placeholder="john@doe.com" type="email" {...field} />
                   </FormControl>
@@ -139,7 +148,7 @@ export function CreateBand() {
               name="origin"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel htmlFor="name">Origin</FormLabel>
+                  <FormLabel>Origin</FormLabel>
                   <FormControl>
                     <Input
                       placeholder="Country where the band is from"
@@ -156,7 +165,7 @@ export function CreateBand() {
               name="foundedYear"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel htmlFor="name">Year founded</FormLabel>
+                  <FormLabel>Year founded</FormLabel>
                   <FormControl>
                     <Select
                       onValueChange={field.onChange}
@@ -184,7 +193,7 @@ export function CreateBand() {
               name="genre"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel htmlFor="name">Genre</FormLabel>
+                  <FormLabel>Genre</FormLabel>
                   <FormControl>
                     <Select
                       onValueChange={field.onChange}
@@ -211,7 +220,7 @@ export function CreateBand() {
               name="bio"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel htmlFor="bio">Biography</FormLabel>
+                  <FormLabel>Biography</FormLabel>
                   <FormControl>
                     <Textarea
                       placeholder="Add a description of the band"
@@ -222,7 +231,33 @@ export function CreateBand() {
                 </FormItem>
               )}
             />
-
+            <FormField
+              control={form.control}
+              name="acceptTerms"
+              render={({ field }) => (
+                <FormItem>
+                  <div className="flex items-center gap-2">
+                    <FormControl>
+                      <Checkbox
+                        checked={field.value}
+                        onCheckedChange={field.onChange}
+                      />
+                    </FormControl>
+                    <FormLabel>I accept the terms and conditions</FormLabel>
+                  </div>
+                  <FormDescription>
+                    By signing up you agree to our{" "}
+                    <Link
+                      href="/terms"
+                      className="text-primary hover:underline"
+                    >
+                      terms and conditions
+                    </Link>
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <Button type="submit" disabled={createBand.isPending}>
               {createBand.isPending ? "Submitting..." : "Submit"}
             </Button>
