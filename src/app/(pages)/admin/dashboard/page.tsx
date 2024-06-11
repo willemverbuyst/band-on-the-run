@@ -1,13 +1,9 @@
 import DashboardShowStats from "~/components/dashboard/dashboard-shows-stats";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "~/components/ui/tabs";
-import { api } from "~/trpc/server";
 
-export default async function DashboardPage() {
-  const t = await api.show.getTotal();
-
-  console.log({ t });
+export default function DashboardPage() {
   return (
-    <Tabs defaultValue="shows">
+    <Tabs defaultValue="shows" className="m-auto lg:max-w-[80vw]">
       <TabsList className="mb-4">
         <TabsTrigger value="shows">Shows stats</TabsTrigger>
         <TabsTrigger value="bands">Bands stats</TabsTrigger>

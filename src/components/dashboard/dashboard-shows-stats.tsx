@@ -11,6 +11,7 @@ export default function DashboardShowStats() {
         <DashboardShowsCardMonth />
         <DashboardShowsCardRandom />
       </div>
+
       <DashboardShowCardChart />
     </>
   );
