@@ -24,7 +24,7 @@ async function createBands() {
       .create({
         data: {
           name,
-          email: `name@${faker.internet.domainName()}`,
+          email: `${name.replace(" ", "_")}@${faker.internet.domainName()}`,
           bio: faker.lorem.lines({ min: 2, max: 4 }),
           genre: getRandomGenres(),
           foundedYear: getRandomYear(),
@@ -46,7 +46,7 @@ async function createBands() {
 async function createShows() {
   const showIds: string[] = [];
   const shows = new Map();
-  const NUMBER_OF_SHOWS = 34;
+  const NUMBER_OF_SHOWS = 43;
   const showCreationPromises = [];
 
   while (shows.size < NUMBER_OF_SHOWS) {
