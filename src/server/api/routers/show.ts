@@ -38,6 +38,10 @@ export const showRouter = createTRPCRouter({
     });
   }),
 
+  getTotal: publicProcedure.query(({ ctx }) => {
+    return ctx.db.show.count();
+  }),
+
   getOne: publicProcedure.input(z.string()).query(({ ctx, input }) => {
     return ctx.db.show.findUnique({
       where: { id: input },

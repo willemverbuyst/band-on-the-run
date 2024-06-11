@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Icons } from "../icons";
-import { Button } from "../ui/button";
 import {
   Card,
   CardContent,
@@ -8,32 +7,17 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
+import DashboardShowsCardTotal from "./dashboard-shows-card-total";
 import DashboardShowChart from "./dashboard-shows-chart";
 
 export default function DashboardShowStats() {
-  const totalShows = 98;
   const showsPerMonth = 24;
   const clubShowsPercentage = 80;
 
   return (
     <>
       <div className="grid gap-4 lg:grid-cols-3">
-        <Card className="flex flex-col">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-base">Total shows</CardTitle>
-          </CardHeader>
-          <CardContent className="flex items-center justify-between">
-            <div className="flex gap-2">
-              <Icons.Drum />
-              <div className="text-5xl font-bold">{totalShows}</div>
-            </div>
-            <div>
-              <Button size="xs" asChild>
-                <Link href="/dashboard/shows">View all</Link>
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
+        <DashboardShowsCardTotal />
         <Card className="flex flex-col">
           <CardHeader className="pb-2">
             <CardTitle className="text-base">Shows this month</CardTitle>
