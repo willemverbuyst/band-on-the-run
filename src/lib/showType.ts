@@ -13,9 +13,9 @@ export function getRandomShowType() {
   switch (true) {
     case randomNumber < 0.5:
       return ShowType.CLUB;
-    case randomNumber < 0.8:
-      return ShowType.FESTIVAL;
     case randomNumber < 0.9:
+      return ShowType.FESTIVAL;
+    case randomNumber < 0.95:
       return ShowType.RADIO;
     default:
       return ShowType.TV;

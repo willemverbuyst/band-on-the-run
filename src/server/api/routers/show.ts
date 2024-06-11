@@ -80,4 +80,13 @@ export const showRouter = createTRPCRouter({
       skip: randomIndex,
     });
   }),
+
+  getShowsCountByMonthAndType: publicProcedure.query(({ ctx }) => {
+    return ctx.db.show.groupBy({
+      by: ["showType", "date"],
+      orderBy: {
+        showType: "asc",
+      },
+    });
+  }),
 });
