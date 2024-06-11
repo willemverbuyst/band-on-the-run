@@ -7,6 +7,7 @@ import {
   Drum,
   Edit,
   FileBarChart,
+  ListMusic,
   Moon,
   Music,
   PartyPopper,
@@ -32,4 +33,5 @@ export const Icons = {
   CalendarX2,
   PartyPopper,
   Drum,
+  ListMusic,
 };
