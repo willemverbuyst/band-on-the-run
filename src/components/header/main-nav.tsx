@@ -115,21 +115,27 @@ export default function MainNav() {
                   </DropdownMenuPortal>
                 </DropdownMenuSub>
               </DropdownMenuGroup>
+              <DropdownMenuSeparator />
+              <DropdownMenuGroup>
+                <DropdownMenuSub>
+                  <DropdownMenuSubTrigger>Dashboard</DropdownMenuSubTrigger>
+                  <DropdownMenuPortal>
+                    <DropdownMenuSubContent>
+                      <DropdownMenuItem>
+                        <Link href="/admin/dashboard">Overview</Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem>
+                        <Link href="/admin/dashboard/shows">Shows</Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem>
+                        <Link href="/admin/dashboard/bands">Bands</Link>
+                      </DropdownMenuItem>
+                    </DropdownMenuSubContent>
+                  </DropdownMenuPortal>
+                </DropdownMenuSub>
+              </DropdownMenuGroup>
             </DropdownMenuContent>
           </DropdownMenu>
-        )}
-        {session && (
-          <Link
-            href="/dashboard"
-            className={cn(
-              "transition-colors hover:text-foreground/80",
-              pathname?.startsWith("/dashboard")
-                ? "text-foreground"
-                : "text-foreground/60",
-            )}
-          >
-            Dashboard
-          </Link>
         )}
       </nav>
     </div>
