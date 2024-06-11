@@ -19,7 +19,7 @@ export default async function DashboardShowsCardRandom() {
         <CardTitle className="text-base">Featured show</CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col gap-2">
-        <Link href="/shows/foobar">
+        <Link href={`/shows/${randomShow[0]?.id}`}>
           <span className="text-2xl">{randomShow[0]?.name}</span>
         </Link>
         <span className="text-1xl">
