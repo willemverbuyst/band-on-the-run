@@ -15,9 +15,7 @@ export default function RootLayout({
   return (
     <div className="relative flex min-h-screen flex-col items-center justify-center bg-background">
       <SiteHeader />
-      <main>
-        <div className="overflow-auto p-12">{children}</div>
-      </main>
+      <main className="w-full flex-grow p-12">{children}</main>
     </div>
   );
 }
