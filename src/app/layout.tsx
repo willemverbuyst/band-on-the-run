@@ -1,9 +1,13 @@
+import { Poppins } from "next/font/google";
+import { cn } from "~/lib/utils";
+import NextAuthProvider from "~/providers/auth-provider";
 import "~/styles/globals.css";
-
-import { GeistSans } from "geist/font/sans";
-
 import { TRPCReactProvider } from "~/trpc/react";
-import NavBar from "./_components/NavBar";
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+});
 
 export const metadata = {
   title: "bandOnTheRun",
@@ -17,14 +21,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${GeistSans.variable}`}>
-      <body>
+    <html lang="en">
+      <body className={cn(poppins.className, "dark")}>
         <TRPCReactProvider>
-          <main className="flex min-h-screen w-full flex-col bg-zinc-950 text-white">
-            <NavBar />
-
-            <div className="overflow-auto p-10">{children}</div>
-          </main>
+          <NextAuthProvider>
+            <div>{children}</div>
+          </NextAuthProvider>
         </TRPCReactProvider>
       </body>
     </html>
