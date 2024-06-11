@@ -46,7 +46,7 @@ async function createBands() {
 async function createShows() {
   const showIds: string[] = [];
   const shows = new Map();
-  const NUMBER_OF_SHOWS = 30;
+  const NUMBER_OF_SHOWS = 34;
   const showCreationPromises = [];
 
   while (shows.size < NUMBER_OF_SHOWS) {
@@ -60,7 +60,7 @@ async function createShows() {
       .create({
         data: {
           name,
-          date: faker.date.future(),
+          date: faker.date.future({ years: 1 }),
           showType: getRandomShowType(),
           location: {
             city: faker.location.city(),

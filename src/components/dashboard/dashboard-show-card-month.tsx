@@ -17,17 +17,17 @@ export default async function DashboardShowsCardMonth() {
         <CardTitle className="text-base">Shows this month</CardTitle>
       </CardHeader>
       <CardContent className="flex gap-2">
-        {thisMonthsShows > 10 ? <Icons.CalendarCheck2 /> : <Icons.CalendarX2 />}
+        {thisMonthsShows > 0 ? <Icons.CalendarCheck2 /> : <Icons.CalendarX2 />}
         <div className="text-5xl font-bold">{thisMonthsShows}</div>
       </CardContent>
       <CardFooter className="mt-auto">
-        {thisMonthsShows > 10 ? (
+        {thisMonthsShows > 0 ? (
           <span className="flex items-center gap-1 text-xs text-green-500">
-            <Icons.BadgeCheck /> More than 10 shows this month
+            <Icons.BadgeCheck /> Shows this month
           </span>
         ) : (
           <span className="flex items-center gap-1 text-xs text-red-500">
-            <Icons.AlertTriangle /> Less than 10 shows this month clubs
+            <Icons.AlertTriangle /> No shows this month
           </span>
         )}
       </CardFooter>
