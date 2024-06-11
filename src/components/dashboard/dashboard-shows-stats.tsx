@@ -1,0 +1,78 @@
+import Link from "next/link";
+import { Icons } from "../icons";
+import { Button } from "../ui/button";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "../ui/card";
+
+export default function DashboardShowStats() {
+  const totalShows = 98;
+  const showsPerMonth = 24;
+  const clubShowsPercentage = 80;
+
+  return (
+    <div className="grid gap-4 lg:grid-cols-3">
+      <Card className="flex flex-col">
+        <CardHeader className="pb-2">
+          <CardTitle className="text-base">Total shows</CardTitle>
+        </CardHeader>
+        <CardContent className="flex items-center justify-between">
+          <div className="flex gap-2">
+            <Icons.drum />
+            <div className="text-5xl font-bold">{totalShows}</div>
+          </div>
+          <div>
+            <Button size="xs" asChild>
+              <Link href="/dashboard/shows">View all</Link>
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
+      <Card className="flex flex-col">
+        <CardHeader className="pb-2">
+          <CardTitle className="text-base">Shows this month</CardTitle>
+        </CardHeader>
+        <CardContent className="flex gap-2">
+          {clubShowsPercentage > 75 ? (
+            <Icons.calendarCheck2 />
+          ) : (
+            <Icons.calendarX2 />
+          )}
+          <div className="text-5xl font-bold">{showsPerMonth}</div>
+        </CardContent>
+        <CardFooter className="mt-auto">
+          {clubShowsPercentage > 75 ? (
+            <span className="flex items-center gap-1 text-xs text-green-500">
+              <Icons.badgeCheck /> {clubShowsPercentage}% of shows are in clubs
+            </span>
+          ) : (
+            <span className="flex items-center gap-1 text-xs text-red-500">
+              <Icons.alertTriangle /> only {clubShowsPercentage}% of the shows
+              are in clubs
+            </span>
+          )}
+        </CardFooter>
+      </Card>
+      <Card className="flex flex-col border-primary">
+        <CardHeader className="pb-2">
+          <CardTitle className="text-base">Featured show</CardTitle>
+        </CardHeader>
+        <CardContent className="flex flex-col gap-2">
+          <Link href="/shows/foobar">
+            <span className="text-2xl">Foo Bar Deluxe</span>
+          </Link>
+          <span className="text-1xl">Adam - Netherlands</span>
+        </CardContent>
+        <CardFooter className="mt-auto">
+          <span className="flex items-center gap-1 text-xs text-muted-foreground">
+            <Icons.partyPopper className="text-primary" /> 18th August 2023
+          </span>
+        </CardFooter>
+      </Card>
+    </div>
+  );
+}

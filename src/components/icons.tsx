@@ -1,14 +1,23 @@
 import {
+  AlertTriangle,
+  BadgeCheck,
   Calendar,
+  CalendarCheck2,
+  CalendarX2,
+  Drum,
   Edit,
   FileBarChart,
   Moon,
   Music,
+  PartyPopper,
   Plus,
   Sun,
+  Theater,
+  Truck,
 } from "lucide-react";
 
 export const Icons = {
+  alertTriangle: AlertTriangle,
   calendar: Calendar,
   music: Music,
   plus: Plus,
@@ -16,4 +25,11 @@ export const Icons = {
   moon: Moon,
   sun: Sun,
   fileBarChart: FileBarChart,
+  theater: Theater,
+  truck: Truck,
+  badgeCheck: BadgeCheck,
+  calendarCheck2: CalendarCheck2,
+  calendarX2: CalendarX2,
+  partyPopper: PartyPopper,
+  drum: Drum,
 };
