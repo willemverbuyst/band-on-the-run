@@ -71,4 +71,13 @@ export const showRouter = createTRPCRouter({
       include: { bandShows: { include: { band: true } } },
     });
   }),
+
+  getRandom: publicProcedure.query(async ({ ctx }) => {
+    const total = await ctx.db.show.count();
+    const randomIndex = Math.floor(Math.random() * total);
+    return ctx.db.show.findMany({
+      take: 1,
+      skip: randomIndex,
+    });
+  }),
 });
