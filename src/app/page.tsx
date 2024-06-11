@@ -35,7 +35,7 @@ export default async function LandingPage() {
         </div>
         <div className="flex max-w-prose flex-col gap-2">
           <h2 className="flex items-center justify-center gap-2">
-            Welcome to <Icons.music className="h-6 w-6 text-primary" />{" "}
+            Welcome to <Icons.Music className="h-6 w-6 text-primary" />{" "}
             bandOnTheRun
           </h2>
 

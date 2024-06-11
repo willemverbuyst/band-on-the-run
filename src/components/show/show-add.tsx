@@ -170,7 +170,7 @@ export function ShowAdd() {
                           ) : (
                             <span>Pick a date</span>
                           )}
-                          <Icons.calendar />
+                          <Icons.Calendar />
                         </Button>
                       </FormControl>
                     </PopoverTrigger>

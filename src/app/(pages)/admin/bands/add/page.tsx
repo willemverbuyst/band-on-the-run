@@ -10,7 +10,7 @@ export default async function Page() {
     <div className="flex flex-col items-center justify-center gap-4">
       {session ? (
         <>
-          <Icons.music size={40} />
+          <Icons.Music size={40} />
           <BandAdd />
         </>
       ) : (

@@ -23,7 +23,7 @@ export default function LightDarkToggle() {
             document.body.classList.toggle("dark");
           }}
         >
-          {isDarkMode ? <Icons.moon /> : <Icons.sun />}
+          {isDarkMode ? <Icons.Moon /> : <Icons.Sun />}
         </TooltipTrigger>
         <TooltipContent>
           {isDarkMode ? "Switch to light mode" : "Switch to dark mode"}

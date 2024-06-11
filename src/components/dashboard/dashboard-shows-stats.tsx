@@ -22,7 +22,7 @@ export default function DashboardShowStats() {
         </CardHeader>
         <CardContent className="flex items-center justify-between">
           <div className="flex gap-2">
-            <Icons.drum />
+            <Icons.Drum />
             <div className="text-5xl font-bold">{totalShows}</div>
           </div>
           <div>
@@ -38,20 +38,20 @@ export default function DashboardShowStats() {
         </CardHeader>
         <CardContent className="flex gap-2">
           {clubShowsPercentage > 75 ? (
-            <Icons.calendarCheck2 />
+            <Icons.CalendarCheck2 />
           ) : (
-            <Icons.calendarX2 />
+            <Icons.CalendarX2 />
           )}
           <div className="text-5xl font-bold">{showsPerMonth}</div>
         </CardContent>
         <CardFooter className="mt-auto">
           {clubShowsPercentage > 75 ? (
             <span className="flex items-center gap-1 text-xs text-green-500">
-              <Icons.badgeCheck /> {clubShowsPercentage}% of shows are in clubs
+              <Icons.BadgeCheck /> {clubShowsPercentage}% of shows are in clubs
             </span>
           ) : (
             <span className="flex items-center gap-1 text-xs text-red-500">
-              <Icons.alertTriangle /> only {clubShowsPercentage}% of the shows
+              <Icons.AlertTriangle /> only {clubShowsPercentage}% of the shows
               are in clubs
             </span>
           )}
@@ -69,7 +69,7 @@ export default function DashboardShowStats() {
         </CardContent>
         <CardFooter className="mt-auto">
           <span className="flex items-center gap-1 text-xs text-muted-foreground">
-            <Icons.partyPopper className="text-primary" /> 18th August 2023
+            <Icons.PartyPopper className="text-primary" /> 18th August 2023
           </span>
         </CardFooter>
       </Card>

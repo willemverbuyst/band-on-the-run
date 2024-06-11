@@ -28,7 +28,7 @@ export default function MainNav() {
   return (
     <div className="mr-4 hidden md:flex">
       <Link href="/" className="mr-6 flex items-center space-x-2">
-        <Icons.music className="h-5 w-5 text-primary" />
+        <Icons.Music className="h-5 w-5 text-primary" />
         <span className="hidden font-bold sm:inline-block">bandOnTheRun</span>
       </Link>
       <nav className="flex items-center gap-4 text-sm lg:gap-6">
@@ -81,13 +81,13 @@ export default function MainNav() {
                   <DropdownMenuPortal>
                     <DropdownMenuSubContent>
                       <DropdownMenuItem>
-                        <Icons.plus className="mr-2 h-4 w-4" />
+                        <Icons.Plus className="mr-2 h-4 w-4" />
                         <Link href="/admin/bands/add">
                           <span>Add new band</span>
                         </Link>
                       </DropdownMenuItem>
                       <DropdownMenuItem>
-                        <Icons.edit className="mr-2 h-4 w-4" />
+                        <Icons.Edit className="mr-2 h-4 w-4" />
                         <Link href="/admin/bands/edit">
                           <span>Edit band</span>
                         </Link>
@@ -100,13 +100,13 @@ export default function MainNav() {
                   <DropdownMenuPortal>
                     <DropdownMenuSubContent>
                       <DropdownMenuItem>
-                        <Icons.plus className="mr-2 h-4 w-4" />
+                        <Icons.Plus className="mr-2 h-4 w-4" />
                         <Link href="/admin/shows/add">
                           <span>Add new show</span>
                         </Link>
                       </DropdownMenuItem>
                       <DropdownMenuItem>
-                        <Icons.edit className="mr-2 h-4 w-4" />
+                        <Icons.Edit className="mr-2 h-4 w-4" />
                         <Link href="/admin/shows/edit">
                           <span>Edit show</span>
                         </Link>
