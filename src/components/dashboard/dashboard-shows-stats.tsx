@@ -7,43 +7,17 @@ import {
   CardHeader,
   CardTitle,
 } from "../ui/card";
+import DashboardShowsCardMonth from "./dashboard-show-card-month";
 import DashboardShowsCardTotal from "./dashboard-shows-card-total";
 import DashboardShowChart from "./dashboard-shows-chart";
 
 export default function DashboardShowStats() {
-  const showsPerMonth = 24;
-  const clubShowsPercentage = 80;
-
   return (
     <>
       <div className="grid gap-4 lg:grid-cols-3">
         <DashboardShowsCardTotal />
-        <Card className="flex flex-col">
-          <CardHeader className="pb-2">
-            <CardTitle className="text-base">Shows this month</CardTitle>
-          </CardHeader>
-          <CardContent className="flex gap-2">
-            {clubShowsPercentage > 75 ? (
-              <Icons.CalendarCheck2 />
-            ) : (
-              <Icons.CalendarX2 />
-            )}
-            <div className="text-5xl font-bold">{showsPerMonth}</div>
-          </CardContent>
-          <CardFooter className="mt-auto">
-            {clubShowsPercentage > 75 ? (
-              <span className="flex items-center gap-1 text-xs text-green-500">
-                <Icons.BadgeCheck /> {clubShowsPercentage}% of shows are in
-                clubs
-              </span>
-            ) : (
-              <span className="flex items-center gap-1 text-xs text-red-500">
-                <Icons.AlertTriangle /> only {clubShowsPercentage}% of the shows
-                are in clubs
-              </span>
-            )}
-          </CardFooter>
-        </Card>
+        <DashboardShowsCardMonth />
+
         <Card className="flex flex-col border-primary">
           <CardHeader className="pb-2">
             <CardTitle className="text-base">Featured show</CardTitle>
